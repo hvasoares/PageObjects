@@ -1,10 +1,10 @@
 package com.github.pageobject;
 
-import com.github.pageobject.impl.SerialPageObjectBuilder;
+import com.github.pageobject.impl.SinglePageObjectBuilder;
 
 public interface PageObjectBuilderFactory {
 
-	public abstract PageObjectBuilder createPageObjectBuilder();
+	public abstract SinglePageObjectBuilder createSinglePageObjectBuilder();
 	public SerialPageObjectBuilder createSerialPageObjectBuilder();
 
 }

@@ -1,8 +1,9 @@
 package com.github.pageobject;
 
-import com.github.pageobject.impl.PageObjectFactoryImpl;
+import com.github.pageobject.impl.PageObjectBuilderImpl;
 import com.github.pageobject.impl.PageObjectImpl;
-import com.github.pageobject.impl.SerialPageObjectBuilder;
+import com.github.pageobject.impl.SerialPageObjectBuilderImpl;
+import com.github.pageobject.impl.SinglePageObjectBuilder;
 import com.github.pageobject.impl.StatePageObjectImpl;
 import com.github.pageobject.impl.browser.Browser;
 import com.github.pageobject.impl.browser.BrowserImpl;
@@ -25,8 +26,8 @@ public class DefaultFactory implements PageObjectBuilderFactory{
 	}
 
 	@Override
-	public PageObjectBuilder createPageObjectBuilder(){
-		PageObjectFactoryImpl result = new PageObjectFactoryImpl(
+	public SinglePageObjectBuilder createSinglePageObjectBuilder(){
+		PageObjectBuilderImpl result = new PageObjectBuilderImpl(
 				new FieldFactoryImpl(
 						getBrowser(),
 						getStateObject()
@@ -54,6 +55,6 @@ public class DefaultFactory implements PageObjectBuilderFactory{
 
 	@Override
 	public SerialPageObjectBuilder createSerialPageObjectBuilder() {
-		return new SerialPageObjectBuilder(this);
+		return new SerialPageObjectBuilderImpl(this);
 	}
 }

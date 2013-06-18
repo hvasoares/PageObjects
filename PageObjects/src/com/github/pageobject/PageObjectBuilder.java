@@ -6,10 +6,7 @@ public interface PageObjectBuilder {
 
 	PageObjectBuilder addTextField(String string, String string2);
 
-	PageObject get();
-
 	PageObjectBuilder addClickable(String alias, String xpath, String toPage);
 
-	PageObjectBuilder setName(String value);
 
 }

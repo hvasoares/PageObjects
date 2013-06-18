@@ -15,14 +15,14 @@ public class PageObjectFactoryImplTest {
 	private Mockery ctx;
 	private FieldFactory fieldFactory;
 	private ImcompletePageObject pageO;
-	private PageObjectFactoryImpl inst;
+	private PageObjectBuilderImpl inst;
 
 	@Before
 	public void setUp(){
 		ctx = new Mockery();
 		pageO = ctx.mock(ImcompletePageObject.class);
 		fieldFactory = ctx.mock(FieldFactory.class);
-		inst = new PageObjectFactoryImpl(fieldFactory);
+		inst = new PageObjectBuilderImpl(fieldFactory);
 	}
 	
 	@Test
@@ -33,9 +33,9 @@ public class PageObjectFactoryImplTest {
 			will(returnValue(newField));
 			oneOf(pageO).addField(newField);
 		}});		
-		PageObject result = inst.startBuild(pageO)
-			.addTextField("fieldname","xpath")
-			.get();
+		inst.startBuild(pageO)
+			.addTextField("fieldname","xpath");
+		PageObject result =inst.get();
 		ctx.assertIsSatisfied();
 		assertEquals(result,pageO);
 	}
@@ -54,10 +54,10 @@ public class PageObjectFactoryImplTest {
 			oneOf(pageO).addClickable(click2);
 
 		}});
-		PageObject result = inst.startBuild(pageO)
+		inst.startBuild(pageO)
 			.addClickable("buttonName","xpath","toPageAlias")
-			.addClickable("buttonName2","xpath2")
-			.get();
+			.addClickable("buttonName2","xpath2");
+		PageObject result = inst.get();
 		ctx.assertIsSatisfied();
 		assertEquals(result,pageO);
 	}

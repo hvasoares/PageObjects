@@ -6,19 +6,22 @@ import java.util.List;
 import com.github.pageobject.PageObject;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.PageObjectBuilderFactory;
+import com.github.pageobject.SerialPageObjectBuilder;
 
-public class SerialPageObjectBuilder implements PageObjectBuilder{
+
+public class SerialPageObjectBuilderImpl implements SerialPageObjectBuilder{
 	private List<PageObject> all;
 	private PageObjectBuilderFactory factory;
-	private PageObjectBuilder current;
-	public SerialPageObjectBuilder(PageObjectBuilderFactory factory){
+	private SinglePageObjectBuilder current;
+	public SerialPageObjectBuilderImpl(PageObjectBuilderFactory factory){
 		this.all = new ArrayList<PageObject>();
 		this.factory = factory;
 	}
+	@Override
 	public SerialPageObjectBuilder newPage(String name){
 		if(current!=null)
 			all.add(current.get());
-		current = factory.createPageObjectBuilder();
+		current = factory.createSinglePageObjectBuilder();
 		current.setName(name);
 		return this;
 	}
@@ -27,19 +30,11 @@ public class SerialPageObjectBuilder implements PageObjectBuilder{
 		current.addClickable(string,string2);
 		return this;
 	}
-
 	@Override
 	public PageObjectBuilder addTextField(String string, String string2) {
 		current.addTextField(string,string2);
 		return this;
 	}
-
-	@Override
-	public PageObject get() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public PageObjectBuilder addClickable(String alias, String xpath,
 			String toPage) {
@@ -48,16 +43,11 @@ public class SerialPageObjectBuilder implements PageObjectBuilder{
 	}
 
 	@Override
-	public PageObjectBuilder setName(String value) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	public List<PageObject> getAll() {
 		if(current!=null){
 			all.add(current.get());
 			current=null;
 		}
 		return all;
-	}
-	
+	}	
 }

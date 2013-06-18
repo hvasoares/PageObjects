@@ -1,6 +1,6 @@
 package com.github.pageobject.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -19,14 +19,14 @@ public class SerialPageObjectBuilderTest {
 	public void shouldCreateVariousPageObjects() {
 		Mockery ctx = new Mockery();
 		final PageObjectBuilderFactory factory = ctx.mock(PageObjectBuilderFactory.class);
-		SerialPageObjectBuilder inst = new SerialPageObjectBuilder(factory);
-		final PageObjectBuilder builder1 = ctx.mock(PageObjectBuilder.class,"builder1");
-		final PageObjectBuilder builder2 = ctx.mock(PageObjectBuilder.class,"builder2");
+		SerialPageObjectBuilderImpl inst = new SerialPageObjectBuilderImpl(factory);
+		final SinglePageObjectBuilder builder1 = ctx.mock(SinglePageObjectBuilder.class,"builder1");
+		final SinglePageObjectBuilder builder2 = ctx.mock(SinglePageObjectBuilder.class,"builder2");
 		po1 = ctx.mock(PageObject.class,"page1");
 		po2 = ctx.mock(PageObject.class,"page2");
 		
 		ctx.checking(new Expectations(){{
-			atLeast(2).of(factory).createPageObjectBuilder();
+			atLeast(2).of(factory).createSinglePageObjectBuilder();
 			will(onConsecutiveCalls(
 					returnValue(builder1),
 					returnValue(builder2)
