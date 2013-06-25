@@ -8,14 +8,12 @@ import com.github.jsteak.JSteakRunnerBuilder;
 import com.github.pageobject.DefaultFactory;
 
 public class PageObjectRunner extends Runner {
-	private Class<?> clazz;
 	private JSteakRunnerBuilder steakRunner;
-	private PageObjectDescription descriptionGetter;
+	private PageObjectDescriptionGetter descriptionGetter;
 	private DefaultFactory factory;
 
 	public PageObjectRunner(Class<?> clazz){
 		ObjectConstructor objConst = new ObjectConstructor();
-		this.clazz = clazz;
 		this.steakRunner = new JSteakRunnerBuilder(clazz);
 		this.descriptionGetter = new PageObjectDescription(
 				this.steakRunner.getDescriptionGetter(),

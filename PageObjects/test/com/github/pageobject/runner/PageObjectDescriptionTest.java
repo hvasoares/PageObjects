@@ -20,7 +20,7 @@ public class PageObjectDescriptionTest {
 
 	private Mockery ctx;
 	private DescriptionGetter runner;
-	private PageObjectDescription inst;
+	private PageObjectDescriptionGetter inst;
 	private RunNotifier notifier;
 	private ObjectConstructor objectConstructor;
 	@Before

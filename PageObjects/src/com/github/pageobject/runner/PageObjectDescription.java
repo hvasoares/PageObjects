@@ -5,7 +5,7 @@ import org.junit.runner.Runner;
 
 import com.github.jsteak.DescriptionGetter;
 
-public class PageObjectDescription implements DescriptionGetter{
+public class PageObjectDescription implements PageObjectDescriptionGetter{
 	private DescriptionGetter descGetter;
 	private Class<?> clazz;
 	private PageObjectRepository repository;
@@ -21,6 +21,7 @@ public class PageObjectDescription implements DescriptionGetter{
 	public Description getDescription() {
 		return descGetter.getDescription();
 	}
+	@Override
 	public PageObjectRepository getRepository() {
 		if(repository!=null)
 			return repository;
