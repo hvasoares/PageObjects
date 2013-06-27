@@ -1,10 +1,10 @@
 package com.github.pageobject.impl;
 
-import com.github.pageobject.ImcompletePageObject;
+import com.github.pageobject.IncompletePageObject;
 import com.github.pageobject.PageObject;
 
 
-public class PageObjectImpl implements ImcompletePageObject{
+public class PageObjectImpl implements IncompletePageObject{
 	
 	private FieldContainer fieldCont;
 	private ClickableContainer clickCont;

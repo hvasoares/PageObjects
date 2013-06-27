@@ -33,12 +33,8 @@ public class SerialPageObjectBuilderTest {
 			));
 			
 			oneOf(builder1).setName("page1");
-			oneOf(builder1).addClickable("someAlias1","someXpath1");
-			oneOf(builder1).addClickable("someAlias1.1","someXpath1.1","action");
-			oneOf(builder1).addTextField("someField1","someXpathField1");
-			
 			oneOf(builder2).setName("page2");
-			oneOf(builder2).addClickable("someAlias2","someXpath2");
+
 			
 			oneOf(builder1).get();
 			will(returnValue(po1));
@@ -47,12 +43,9 @@ public class SerialPageObjectBuilderTest {
 			will(returnValue(po2));
 		}});
 		
-		inst.newPage("page1")
-			.addClickable("someAlias1","someXpath1")
-			.addClickable("someAlias1.1","someXpath1.1","action")
-			.addTextField("someField1","someXpathField1");
-		inst.newPage("page2")
-			.addClickable("someAlias2","someXpath2");
+		assertEquals(inst.newPage("page1"),builder1);
+		assertEquals(inst.newPage("page2"),builder2);
+
 		assertEquals(inst.getAll().get(0),po1);
 		assertEquals(inst.getAll().get(1),po2);
 		ctx.assertIsSatisfied();

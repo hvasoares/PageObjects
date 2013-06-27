@@ -1,13 +1,13 @@
 package com.github.pageobject.impl;
 
-import com.github.pageobject.ImcompletePageObject;
+import com.github.pageobject.IncompletePageObject;
 import com.github.pageobject.PageObject;
 import com.github.pageobject.PageObjectBuilder;
 
 public class PageObjectFactoryImpl implements PageObjectBuilder,WaitingStartFactory {
 
 	private FieldFactory fieldFactory;
-	private ImcompletePageObject object;
+	private IncompletePageObject object;
 
 	public PageObjectFactoryImpl(FieldFactory fieldFactory) {
 		this.fieldFactory = fieldFactory;
@@ -30,7 +30,7 @@ public class PageObjectFactoryImpl implements PageObjectBuilder,WaitingStartFact
 		return object;
 	}
 
-	public PageObjectBuilder startBuild(ImcompletePageObject newOne ) {
+	public PageObjectBuilder startBuild(IncompletePageObject newOne ) {
 		this.object = newOne;
 		return this;
 	}
@@ -44,6 +44,12 @@ public class PageObjectFactoryImpl implements PageObjectBuilder,WaitingStartFact
 	@Override
 	public PageObjectBuilder setName(String value) {
 		this.object.setName(value);
+		return this;
+	}
+
+	@Override
+	public PageObjectBuilder addCustomField(Field custom) {
+		this.object.addField(custom);
 		return this;
 	}
 

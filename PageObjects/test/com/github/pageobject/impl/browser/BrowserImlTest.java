@@ -43,9 +43,7 @@ public class BrowserImlTest {
 			WebElement textField = ctx.mock(WebElement.class);
 			oneOf(driver).findElement(with(any(By.ByXPath.class)));
 			will(returnValue(textField));
-			
-			
-			oneOf(textField).click();
+
 			oneOf(textField).sendKeys("someValue");
 			
 		}});

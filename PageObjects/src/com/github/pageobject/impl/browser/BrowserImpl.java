@@ -26,7 +26,6 @@ public class BrowserImpl implements Browser{
 	public void fill(String xpath, String value) {
 		assertValidState();
 		WebElement textF = driver.findElement(By.xpath(xpath));
-		textF.click();
 		textF.sendKeys(value);
 	}
 

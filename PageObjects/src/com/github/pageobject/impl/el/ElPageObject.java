@@ -1,12 +1,12 @@
 package com.github.pageobject.impl.el;
 
-import com.github.pageobject.ImcompletePageObject;
+import com.github.pageobject.IncompletePageObject;
 import com.github.pageobject.PageObject;
 import com.github.pageobject.impl.Clickable;
 import com.github.pageobject.impl.Field;
 import com.github.pageobject.impl.PageObjectImpl;
 
-public class ElPageObject implements ImcompletePageObject {
+public class ElPageObject implements IncompletePageObject {
 
 	public ElPageObject(ElContext elContext, PageObjectImpl pageObjectImpl) {
 		// TODO Auto-generated constructor stub
