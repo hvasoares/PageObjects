@@ -14,7 +14,7 @@ import com.github.pageobject.impl.webdriver.FirefoxWebDriverFactory;
 import com.github.pageobject.impl.webdriver.WebDriverFactory;
 import com.github.pageobject.runner.PageObjectRepository;
 
-public class DefaultFactory implements PageObjectBuilderFactory{
+public class DefaultFactory implements AbstractFactory{
 	private StatePageObjectImpl state;
 	private Browser browser;
 	private PageObjectRepository repository;
@@ -38,12 +38,14 @@ public class DefaultFactory implements PageObjectBuilderFactory{
 		));
 	}
 	
+	@Override
 	public StatePageObject getStateObject(){
 		if(this.state==null)
 			state = new StatePageObjectImpl(repository);
 		return state;
 	}
 	
+	@Override
 	public Browser getBrowser(){
 		if(this.browser!=null)
 			return browser;

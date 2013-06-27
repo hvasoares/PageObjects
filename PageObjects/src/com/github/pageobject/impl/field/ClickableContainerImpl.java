@@ -18,7 +18,11 @@ public class ClickableContainerImpl implements ClickableContainer {
 		Clickable click = dataBase.get(buttonAlias);
 		if(click==null)
 			throw new RuntimeException("there's no clickable aliased " + buttonAlias);
-		click.click();
+		try{
+			click.click();
+		}catch(Throwable ex){
+			throw new RuntimeException("Couldn't no click " + buttonAlias,ex);
+		}
 	}
 
 	@Override

@@ -38,7 +38,9 @@ public class StatePageObjectImpl implements StatePageObject{
 
 	@Override
 	public PageObject fill(String field, String value) {
-		allStates.get(now).fill(field,value);
+		allStates
+			.get(now)
+			.fill(field,value);
 		return this;
 	}
 
