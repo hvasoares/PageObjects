@@ -5,24 +5,25 @@ import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 
 import com.github.jsteak.JSteakRunnerBuilder;
-import com.github.pageobject.DefaultFactory;
+import com.github.pageobject.AbstractFactory;
+import com.github.pageobject.impl.el.ELPageObjectBuilderFactory;
 
 public class PageObjectRunner extends Runner {
-	private Class<?> clazz;
 	private JSteakRunnerBuilder steakRunner;
 	private PageObjectDescription descriptionGetter;
-	private DefaultFactory factory;
+	private AbstractFactory factory;
 
 	public PageObjectRunner(Class<?> clazz){
 		ObjectConstructor objConst = new ObjectConstructor();
-		this.clazz = clazz;
 		this.steakRunner = new JSteakRunnerBuilder(clazz);
 		this.descriptionGetter = new PageObjectDescription(
 				this.steakRunner.getDescriptionGetter(),
 				objConst, 
 				clazz
 		);
-		factory = new DefaultFactory(descriptionGetter.getRepository());
+		factory = new ELPageObjectBuilderFactory(
+				descriptionGetter.getRepository()
+		);
 		steakRunner.setDefaultClassUtil(new ClassReflectionUtilsImpl(
 				objConst,
 				factory
@@ -38,7 +39,8 @@ public class PageObjectRunner extends Runner {
 	public void run(RunNotifier notifier) {
 		try{
 			steakRunner.run(notifier);
-		}catch(RuntimeException ex){
+			factory.getBrowser().close();
+		}catch(Throwable ex){
 			factory.getBrowser().close();
 		}
 	}

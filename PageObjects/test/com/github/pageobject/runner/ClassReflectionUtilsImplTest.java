@@ -1,13 +1,13 @@
 package com.github.pageobject.runner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Test;
 
-import com.github.pageobject.DefaultFactory;
+import com.github.pageobject.AbstractFactory;
 import com.github.pageobject.PageObjectBuilderFactory;
 import com.github.pageobject.runner.resources.SampleTest;
 
@@ -23,7 +23,7 @@ public class ClassReflectionUtilsImplTest {
 			setImposteriser(ClassImposteriser.INSTANCE);
 		}};
 		final ObjectConstructor constructor = ctx.mock(ObjectConstructor.class);
-		factory = ctx.mock(DefaultFactory.class);
+		factory = ctx.mock(AbstractFactory.class);
 		
 		inst = new ClassReflectionUtilsImpl(constructor,factory);
 		final SampleTest test = new SampleTest();

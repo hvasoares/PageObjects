@@ -18,7 +18,12 @@ public class FieldContainerImpl implements FieldContainer{
 		Field chosen = dataBase.get(aliase);
 		if(chosen==null)
 			throw new RuntimeException("there's no field aliased with " + aliase);
-		chosen.fill(value);
+		try{
+			chosen.fill(value);
+		}catch(Throwable ex){
+			throw new RuntimeException("Couldn't fill the field " + aliase 
+					+ " with " + value,ex);
+		}
 	}
 
 	@Override
