@@ -10,6 +10,7 @@ import com.github.pageobject.impl.browser.RetryBrowser;
 import com.github.pageobject.impl.field.ClickableContainerImpl;
 import com.github.pageobject.impl.field.FieldContainerImpl;
 import com.github.pageobject.impl.field.FieldFactoryImpl;
+import com.github.pageobject.impl.field.file.FileFieldFactoryImpl;
 import com.github.pageobject.impl.webdriver.FirefoxWebDriverFactory;
 import com.github.pageobject.impl.webdriver.WebDriverFactory;
 import com.github.pageobject.runner.PageObjectRepository;
@@ -29,7 +30,8 @@ public class DefaultFactory implements AbstractFactory{
 		PageObjectFactoryImpl result = new PageObjectFactoryImpl(
 				new FieldFactoryImpl(
 						getBrowser(),
-						getStateObject()
+						getStateObject(),
+						new FileFieldFactoryImpl(getBrowser())
 					)
 		);
 		return result.startBuild(new PageObjectImpl(

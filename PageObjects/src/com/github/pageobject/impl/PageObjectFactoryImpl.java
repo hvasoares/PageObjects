@@ -53,4 +53,10 @@ public class PageObjectFactoryImpl implements PageObjectBuilder,WaitingStartFact
 		return this;
 	}
 
+	@Override
+	public PageObjectBuilder addFileField(String value, String xpath) {
+		this.object.addField(fieldFactory.createFileField(value,xpath));
+		return this;
+	}
+
 }

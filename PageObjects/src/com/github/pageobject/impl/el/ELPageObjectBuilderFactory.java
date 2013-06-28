@@ -13,6 +13,8 @@ import com.github.pageobject.impl.browser.Browser;
 import com.github.pageobject.impl.field.ClickableContainerImpl;
 import com.github.pageobject.impl.field.FieldContainerImpl;
 import com.github.pageobject.impl.field.FieldFactoryImpl;
+import com.github.pageobject.impl.field.file.FileFieldFactory;
+import com.github.pageobject.impl.field.file.FileFieldFactoryImpl;
 import com.github.pageobject.runner.PageObjectRepository;
 
 public class ELPageObjectBuilderFactory implements AbstractFactory{
@@ -31,7 +33,8 @@ public class ELPageObjectBuilderFactory implements AbstractFactory{
 						getElContext(),
 						new FieldFactoryImpl(
 								getBrowser(), 
-								getStateObject()
+								getStateObject(),
+								new FileFieldFactoryImpl(getBrowser())
 						)
 		)).startBuild(new PageObjectImpl(
 					new ClickableContainerImpl(),

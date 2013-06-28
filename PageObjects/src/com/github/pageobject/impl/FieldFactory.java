@@ -8,4 +8,6 @@ public interface FieldFactory {
 
 	Clickable createClickable(String alias, String xpath);
 
+	Field createFileField(String value, String xpath);
+
 }

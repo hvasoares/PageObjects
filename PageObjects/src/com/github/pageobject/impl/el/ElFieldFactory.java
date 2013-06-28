@@ -34,4 +34,9 @@ public class ElFieldFactory implements FieldFactory{
 		return createClickable(alias,xpath,null);
 	}
 
+	@Override
+	public Field createFileField(String alias, String xpath) {
+		return fieldFactory.createFileField(alias,xpath);
+	}
+
 }
