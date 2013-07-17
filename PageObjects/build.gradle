@@ -1,0 +1,26 @@
+apply plugin: 'java'
+sourceCompatibility = 1.7
+sourceSets {
+	main {
+		java {srcDir 'src'}
+	}
+	test {
+		java {srcDir 'test'}
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'2.33.0'
+	compile group: 'org.apache.commons', name:'commons-jexl', version: '2.1.1'
+	compile group: 'com.google.inject', name:'guice', version: '3.0'
+	compile group: 'com.google.guava', name:'guava', version: '14.0'
+	testCompile group: 'org.junit', name:'junit', version: '4.10'
+	testCompile group: 'org.jmock', name:'jmock', version: '2.6.0'
+	testCompile group: 'org.jmock', name:'jmock-legacy', version: '2.6.0'
+	testCompile group: 'org.jmock', name:'jmock-junit4', version: '2.6.0'
+	compile group: 'org.projectlombok', name: 'lombok', version: '0.12.0'
+}
