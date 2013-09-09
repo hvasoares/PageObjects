@@ -4,9 +4,11 @@ import com.github.pageobject.impl.Clickable;
 import com.github.pageobject.impl.Field;
 import com.github.pageobject.impl.FieldFactory;
 import com.github.pageobject.impl.field.ClickableParams;
+import com.github.pageobject.impl.field.CustomField;
 
 public class ElFieldFactory implements FieldFactory{
 	private ElContext elContext;
+	
 	private FieldFactory fieldFactory;
 	public ElFieldFactory(ElContext elContext, FieldFactory fieldFactory) {
 		super();
@@ -37,6 +39,10 @@ public class ElFieldFactory implements FieldFactory{
 	@Override
 	public Field createFileField(String alias, String xpath) {
 		return fieldFactory.createFileField(alias,xpath);
+	}
+	
+	public Field createCustomField(CustomField field){
+		return fieldFactory.createCustomField(field);
 	}
 
 }

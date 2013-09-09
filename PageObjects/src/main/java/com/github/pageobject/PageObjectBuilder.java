@@ -1,6 +1,6 @@
 package com.github.pageobject;
 
-import com.github.pageobject.impl.Field;
+import com.github.pageobject.impl.field.CustomField;
 
 public interface PageObjectBuilder {
 
@@ -13,9 +13,9 @@ public interface PageObjectBuilder {
 	PageObjectBuilder addClickable(String alias, String xpath, String toPage);
 
 	PageObjectBuilder setName(String value);
-	
-	PageObjectBuilder addCustomField(Field custom);
 
 	PageObjectBuilder addFileField(String string, String string2);
+
+	PageObjectBuilder addCustomField(CustomField custom);
 
 }

@@ -1,5 +1,7 @@
 package com.github.pageobject;
 
+import org.openqa.selenium.WebDriver;
+
 import com.github.pageobject.impl.PageObjectFactoryImpl;
 import com.github.pageobject.impl.PageObjectImpl;
 import com.github.pageobject.impl.SerialPageObjectBuilder;

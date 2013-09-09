@@ -1,8 +1,11 @@
 package com.github.pageobject.impl;
 
+import lombok.Delegate;
+
 import com.github.pageobject.AssertivePageObject;
 import com.github.pageobject.IncompletePageObject;
 import com.github.pageobject.PageObjectBuilder;
+import com.github.pageobject.impl.field.CustomField;
 
 public class PageObjectFactoryImpl implements PageObjectBuilder,WaitingStartFactory {
 
@@ -49,8 +52,8 @@ public class PageObjectFactoryImpl implements PageObjectBuilder,WaitingStartFact
 	}
 
 	@Override
-	public PageObjectBuilder addCustomField(Field custom) {
-		this.object.addField(custom);
+	public PageObjectBuilder addCustomField(CustomField custom) {
+		this.object.addField(fieldFactory.createCustomField(custom));
 		return this;
 	}
 

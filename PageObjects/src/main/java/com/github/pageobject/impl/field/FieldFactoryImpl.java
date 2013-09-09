@@ -48,4 +48,10 @@ public class FieldFactoryImpl implements FieldFactory{
 	public Field createFileField(String alias, String xpath) {
 		return fileFieldFactory.create(alias,xpath);
 	}
+	
+	@Override
+	public Field createCustomField(CustomField custom){
+		custom.setBrowser(browser);
+		return custom;
+	}
 }

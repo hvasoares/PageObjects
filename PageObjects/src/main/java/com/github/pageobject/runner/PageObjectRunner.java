@@ -1,5 +1,9 @@
 package com.github.pageobject.runner;
 
+import org.junit.runner.Description;
+import org.junit.runner.Runner;
+import org.junit.runner.notification.RunNotifier;
+
 import com.github.jsteak.JSteakRunnerBuilder;
 import com.github.pageobject.AbstractFactory;
 import com.github.pageobject.impl.el.ELPageObjectBuilderFactory;

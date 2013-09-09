@@ -9,7 +9,6 @@ import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.Description;
-import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 
 import com.github.jsteak.DescriptionGetter;
@@ -21,8 +20,8 @@ public class PageObjectDescriptionTest {
 	private Mockery ctx;
 	private DescriptionGetter runner;
 	private PageObjectDescription inst;
-	private RunNotifier notifier;
 	private ObjectConstructor objectConstructor;
+	
 	@Before
 	public void setUp() {
 		ctx = new Mockery(){{
