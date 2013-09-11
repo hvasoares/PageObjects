@@ -21,7 +21,7 @@ public class ClickableContainerImpl implements ClickableContainer {
 		try{
 			click.click();
 		}catch(Throwable ex){
-			throw new RuntimeException("Couldn't no click " + buttonAlias,ex);
+			throw new RuntimeException("Couldn't click " + buttonAlias,ex);
 		}
 	}
 

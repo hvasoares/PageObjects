@@ -5,19 +5,23 @@ import org.jmock.Mockery;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.pageobject.impl.assertivepageobject.Assertiveness;
+
 public class PageObjectImplTest {
 
 	private FieldContainer fieldCont;
 	private ClickableContainer clickCont;
 	private PageObjectImpl inst;
 	private Mockery ctx;
+	private Assertiveness assertiveness;
 
 	@Before
 	public void setUp() {
 		ctx = new Mockery();
 		clickCont = ctx.mock(ClickableContainer.class);
 		fieldCont = ctx.mock(FieldContainer.class);
-		inst = new PageObjectImpl(clickCont,fieldCont);
+		assertiveness = ctx.mock(Assertiveness.class);
+		inst = new PageObjectImpl(clickCont,fieldCont,assertiveness);
 	}
 	
 	@Test

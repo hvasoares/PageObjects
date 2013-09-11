@@ -3,22 +3,14 @@ package com.github.pageobject.impl.assertivepageobject;
 import java.util.HashMap;
 import java.util.Map;
 
-import lombok.Delegate;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.github.pageobject.AssertivePageObject;
-import com.github.pageobject.IncompletePageObject;
-
-public class AssertivePageObjectImpl implements AssertivePageObject{
-	@Delegate(types=IncompletePageObject.class)
-	private IncompletePageObject inner;
+public class AssertivePageObjectImpl implements Assertiveness{
 	private WebDriver driver;
 	private Map<String,String> db;
 	
-	public AssertivePageObjectImpl(IncompletePageObject inner, WebDriver webDriver){
-		this.inner = inner;
+	public AssertivePageObjectImpl(WebDriver webDriver){
 		this.driver = webDriver;
 		this.db=new HashMap<String, String>();
 	}

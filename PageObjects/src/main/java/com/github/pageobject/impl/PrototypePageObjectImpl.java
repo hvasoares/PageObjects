@@ -2,14 +2,13 @@ package com.github.pageobject.impl;
 
 import com.github.pageobject.PageObject;
 import com.github.pageobject.PrototypePageObject;
+import com.github.pageobject.proxy.ProxyPageObjectAdapter;
 
-public class PrototypePageObjectImpl implements PrototypePageObject{
+public class PrototypePageObjectImpl extends ProxyPageObjectAdapter{
 
 	private PageObject clone;
-	private PageObject innerObject;
 
-	public PrototypePageObjectImpl(PageObject pageObject1, PageObject clone) {
-		this.innerObject = pageObject1;
+	public PrototypePageObjectImpl(PageObject clone) {
 		this.clone = clone;
 	}
 	@Override
@@ -17,7 +16,7 @@ public class PrototypePageObjectImpl implements PrototypePageObject{
 		try{
 			clone.fill(field,value);
 		}catch(RuntimeException ex){
-			innerObject.fill(field,value);
+			getInner().fill(field,value);
 		}
 		return this;
 	}
@@ -26,12 +25,12 @@ public class PrototypePageObjectImpl implements PrototypePageObject{
 		try{
 			clone.click(button);
 		}catch(RuntimeException ex){
-			innerObject.click(button);
+			getInner().click(button);
 		}
 		return this;
 	}
 	@Override
 	public String getName() {
-		return innerObject.getName();
+		return getInner().getName();
 	}
 }

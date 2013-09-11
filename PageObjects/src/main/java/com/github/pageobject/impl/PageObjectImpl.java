@@ -2,19 +2,34 @@ package com.github.pageobject.impl;
 
 import com.github.pageobject.IncompletePageObject;
 import com.github.pageobject.PageObject;
+import com.github.pageobject.impl.assertivepageobject.Assertiveness;
 
 
 public class PageObjectImpl implements IncompletePageObject{
 	
 	private FieldContainer fieldCont;
 	private ClickableContainer clickCont;
-	private String name;
+	private String name;	
+	private Assertiveness assertiveness;
 
-	public PageObjectImpl(ClickableContainer clickCont, FieldContainer fieldCont) {
+	public PageObjectImpl(ClickableContainer clickCont, FieldContainer fieldCont, Assertiveness assertiveness) {
 		this.clickCont = clickCont;
 		this.fieldCont = fieldCont;
+		this.assertiveness = assertiveness;
+	}
+	
+	public void pageAssertion(String xpath) {
+		assertiveness.pageAssertion(xpath);
 	}
 
+	public void addNamedAssertion(String name, String xpath) {
+		assertiveness.addNamedAssertion(name, xpath);
+	}
+
+	public void checkAssertion(String namedAssertion) {
+		assertiveness.checkAssertion(namedAssertion);
+	}
+	
 	@Override
 	public PageObject fill(String field, String value) {
 		this.fieldCont.fill(field,value);

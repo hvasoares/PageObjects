@@ -1,17 +1,14 @@
 package com.github.pageobject.impl;
 
-import lombok.Delegate;
-
-import com.github.pageobject.AssertivePageObject;
 import com.github.pageobject.IncompletePageObject;
+import com.github.pageobject.PageObject;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.impl.field.CustomField;
 
 public class PageObjectFactoryImpl implements PageObjectBuilder,WaitingStartFactory {
 
 	private FieldFactory fieldFactory;
-	@Delegate(types=AssertivePageObject.class,excludes=IncompletePageObject.class)
-	private AssertivePageObject object;
+	private IncompletePageObject object;
 
 	public PageObjectFactoryImpl(FieldFactory fieldFactory) {
 		this.fieldFactory = fieldFactory;
@@ -30,11 +27,11 @@ public class PageObjectFactoryImpl implements PageObjectBuilder,WaitingStartFact
 	}
 
 	@Override
-	public AssertivePageObject get() {
+	public PageObject get() {
 		return object;
 	}
 
-	public PageObjectBuilder startBuild(AssertivePageObject newOne ) {
+	public PageObjectBuilder startBuild(IncompletePageObject newOne ) {
 		this.object = newOne;
 		return this;
 	}
@@ -60,6 +57,12 @@ public class PageObjectFactoryImpl implements PageObjectBuilder,WaitingStartFact
 	@Override
 	public PageObjectBuilder addFileField(String value, String xpath) {
 		this.object.addField(fieldFactory.createFileField(value,xpath));
+		return this;
+	}
+	
+	@Override
+	public PageObjectBuilder addNamedAssert(String name, String xpath){
+		object.addNamedAssertion(name, xpath);
 		return this;
 	}
 

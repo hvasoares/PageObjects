@@ -21,6 +21,7 @@ public class ELPageObjectBuilderFactory implements AbstractFactory{
 
 	private ElContext elContext;
 	private DefaultFactory factory;
+	private SerialPageObjectBuilder serialPageObjectBuilder;
 	public ELPageObjectBuilderFactory(PageObjectRepository repo){
 		factory = new DefaultFactory(repo);
 		repo.setBuilderFactory(this);
@@ -36,18 +37,21 @@ public class ELPageObjectBuilderFactory implements AbstractFactory{
 								getStateObject(),
 								new FileFieldFactoryImpl(getBrowser())
 						)
-		)).startBuild( new AssertivePageObjectImpl(
+		)).startBuild( 
 				new PageObjectImpl(
 					new ClickableContainerImpl(),
-					new FieldContainerImpl()
-				),
-				factory.getWebDriver()
-		));
+					new FieldContainerImpl(),
+					new AssertivePageObjectImpl(factory.getWebDriver())
+				)		
+		);
 	}
 
 	@Override
 	public SerialPageObjectBuilder createSerialPageObjectBuilder() {
-		return new SerialPageObjectBuilder(this);
+		if(serialPageObjectBuilder!=null)
+			return serialPageObjectBuilder;
+		this.serialPageObjectBuilder= new SerialPageObjectBuilder(this);
+		return serialPageObjectBuilder;
 	}
 
 	@Override

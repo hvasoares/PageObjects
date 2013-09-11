@@ -7,6 +7,7 @@ import org.jmock.Mockery;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.pageobject.IncompletePageObject;
 import com.github.pageobject.PageObject;
 
 public class PrototypePageObjectImplTest {
@@ -14,14 +15,15 @@ public class PrototypePageObjectImplTest {
 	private Mockery ctx;
 	private PageObject clone;
 	private PrototypePageObjectImpl inst;
-	private PageObject innerObject;
+	private IncompletePageObject innerObject;
 
 	@Before
 	public void setUp() {
 		ctx = new Mockery();
 		clone = ctx.mock(PageObject.class,"clone");
-		innerObject = ctx.mock(PageObject.class,"inner");
-		inst = new PrototypePageObjectImpl(innerObject,clone);
+		innerObject = ctx.mock(IncompletePageObject.class,"inner");
+		inst = new PrototypePageObjectImpl(clone);
+		inst.setInnerObject(innerObject);
 	}
 	
 	@Test

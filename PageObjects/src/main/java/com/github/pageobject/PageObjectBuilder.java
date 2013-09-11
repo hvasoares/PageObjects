@@ -8,7 +8,7 @@ public interface PageObjectBuilder {
 
 	PageObjectBuilder addTextField(String string, String string2);
 
-	AssertivePageObject get();
+	PageObject get();
 
 	PageObjectBuilder addClickable(String alias, String xpath, String toPage);
 
@@ -17,5 +17,7 @@ public interface PageObjectBuilder {
 	PageObjectBuilder addFileField(String string, String string2);
 
 	PageObjectBuilder addCustomField(CustomField custom);
+
+	PageObjectBuilder addNamedAssert(String name, String xpath);
 
 }

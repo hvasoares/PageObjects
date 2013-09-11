@@ -7,6 +7,7 @@ import org.apache.commons.jexl2.JexlContext;
 
 import com.github.pageobject.PageObject;
 import com.github.pageobject.StatePageObject;
+import com.github.pageobject.impl.StatePageObjectImpl;
 
 public class ElContextImpl implements ElContext {
 	private StatePageObject inner;
@@ -54,17 +55,22 @@ public class ElContextImpl implements ElContext {
 	}
 	
 
-	public PageObject fill(String field, String value) { 
+	public StatePageObject fill(String field, String value) { 
 		assign(field,evaluate(value));
 		return inner.fill(field,evaluate(value));
 	}
 
-	public PageObject click(String string) {
+	public StatePageObject click(String string) {
 		return inner.click(string);
 	}
 
 	public String getName() {
 		return inner.getName();
+	}
+
+	@Override
+	public StatePageObject checkAssertion(String namedAssertion) {
+		return inner.checkAssertion(namedAssertion);
 	}
 	
 }

@@ -38,15 +38,13 @@ public class DefaultFactory implements AbstractFactory{
 						new FileFieldFactoryImpl(getBrowser())
 					)
 		);
-		return result.startBuild(
-				new AssertivePageObjectImpl( 
-						new PageObjectImpl(
-								new ClickableContainerImpl(),
-								new FieldContainerImpl()
-								),
-						getWebDriver()
+		return result.startBuild( 
+				new PageObjectImpl(
+						new ClickableContainerImpl(),
+						new FieldContainerImpl(),
+						new AssertivePageObjectImpl(getWebDriver())
 				)
-			);
+		);
 	}
 	
 	@Override

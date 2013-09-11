@@ -21,7 +21,6 @@ public class AssertivePageObjectImplTest {
 	public void setUp() {
 		ctx  = new Mockery();
 		inst = new AssertivePageObjectImpl(
-				inner = ctx.mock(IncompletePageObject.class),
 				driver = ctx.mock(WebDriver.class)
 		);
 	}

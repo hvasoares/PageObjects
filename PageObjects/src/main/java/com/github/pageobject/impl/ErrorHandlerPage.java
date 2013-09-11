@@ -1,8 +1,9 @@
 package com.github.pageobject.impl;
 
 import com.github.pageobject.PageObject;
+import com.github.pageobject.proxy.ProxyPageObjectAdapter;
 
-public class ErrorHandlerPage implements PageObject {
+public class ErrorHandlerPage extends ProxyPageObjectAdapter {
 	private PageObject innerPage;
 		
 	public ErrorHandlerPage(PageObject innerPage) {
@@ -30,7 +31,7 @@ public class ErrorHandlerPage implements PageObject {
 			innerPage.click(alias);
 		}catch(RuntimeException ex){
 			throw new RuntimeException(
-					"Some problems showed when trying click button " +
+					"Some problems appeared when trying click button " +
 							"'"+alias+"' at page '"+getName()+"'",
 				ex
 			);

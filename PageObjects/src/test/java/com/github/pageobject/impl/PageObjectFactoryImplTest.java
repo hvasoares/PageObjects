@@ -15,13 +15,13 @@ public class PageObjectFactoryImplTest {
 
 	private Mockery ctx;
 	private FieldFactory fieldFactory;
-	private AssertivePageObject pageO;
+	private IncompletePageObject pageO;
 	private PageObjectFactoryImpl inst;
 
 	@Before
 	public void setUp(){
 		ctx = new Mockery();
-		pageO = ctx.mock(AssertivePageObject.class);
+		pageO = ctx.mock(IncompletePageObject.class);
 		fieldFactory = ctx.mock(FieldFactory.class);
 		inst = new PageObjectFactoryImpl(fieldFactory);
 	}
