@@ -9,8 +9,13 @@ public abstract class ProxyPageObjectAdapter implements ProxyPageObject{
 
 	private IncompletePageObject inner;
 	
-	protected IncompletePageObject getInner(){
+	protected final IncompletePageObject getInner(){
 		return this.inner;
+	}
+	
+	@Override
+	public final void setInnerObject(IncompletePageObject value) {
+		this.inner = value;
 	}
 
 	public void pageAssertion(String xpath) {
@@ -63,13 +68,6 @@ public abstract class ProxyPageObjectAdapter implements ProxyPageObject{
 
 	public void setName(String value) {
 		inner.setName(value);
-	}
-
-
-
-	@Override
-	public void setInnerObject(IncompletePageObject value) {
-		this.inner = value;
 	}
 
 }

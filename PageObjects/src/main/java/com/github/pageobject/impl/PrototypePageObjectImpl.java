@@ -4,7 +4,7 @@ import com.github.pageobject.PageObject;
 import com.github.pageobject.PrototypePageObject;
 import com.github.pageobject.proxy.ProxyPageObjectAdapter;
 
-public class PrototypePageObjectImpl extends ProxyPageObjectAdapter{
+public class PrototypePageObjectImpl extends PageObjectSymbolTable{
 
 	private PageObject clone;
 

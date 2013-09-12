@@ -1,11 +1,10 @@
 package com.github.pageobject.impl;
 
-import com.github.pageobject.IncompletePageObject;
 import com.github.pageobject.PageObject;
 import com.github.pageobject.impl.assertivepageobject.Assertiveness;
 
 
-public class PageObjectImpl implements IncompletePageObject{
+public class PageObjectImpl extends PageObjectSymbolTable{
 	
 	private FieldContainer fieldCont;
 	private ClickableContainer clickCont;

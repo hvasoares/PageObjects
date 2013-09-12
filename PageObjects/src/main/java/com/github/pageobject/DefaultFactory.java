@@ -2,24 +2,32 @@ package com.github.pageobject;
 
 import org.openqa.selenium.WebDriver;
 
+import com.github.pageobject.impl.PageObjectBuilderSymbolTable;
 import com.github.pageobject.impl.PageObjectFactoryImpl;
 import com.github.pageobject.impl.PageObjectImpl;
+import com.github.pageobject.impl.ProxyPageObjectBuilderAdapter;
+import com.github.pageobject.impl.ProxyStatePageObjectAdapter;
 import com.github.pageobject.impl.SerialPageObjectBuilder;
 import com.github.pageobject.impl.StatePageObjectImpl;
-import com.github.pageobject.impl.assertivepageobject.AssertivePageObjectImpl;
+import com.github.pageobject.impl.StatePageObjectSymbolTable;
+import com.github.pageobject.impl.assertivepageobject.AssertivenessImpl;
 import com.github.pageobject.impl.browser.Browser;
 import com.github.pageobject.impl.browser.BrowserImpl;
 import com.github.pageobject.impl.browser.RetryBrowser;
+import com.github.pageobject.impl.el.ElFactory;
 import com.github.pageobject.impl.field.ClickableContainerImpl;
 import com.github.pageobject.impl.field.FieldContainerImpl;
 import com.github.pageobject.impl.field.FieldFactoryImpl;
 import com.github.pageobject.impl.field.file.FileFieldFactoryImpl;
+import com.github.pageobject.impl.readability.ReadabilityBuilder;
+import com.github.pageobject.impl.readability.ReadabilityImplementationFactory;
 import com.github.pageobject.impl.webdriver.FirefoxWebDriverFactory;
 import com.github.pageobject.impl.webdriver.WebDriverFactory;
+import com.github.pageobject.proxy.MatryoshkaDollFactory;
 import com.github.pageobject.runner.PageObjectRepository;
 
 public class DefaultFactory implements AbstractFactory{
-	private StatePageObjectImpl state;
+	private StatePageObjectSymbolTable state;
 	private Browser browser;
 	private PageObjectRepository repository;
 	private WebDriver driver;
@@ -31,26 +39,38 @@ public class DefaultFactory implements AbstractFactory{
 
 	@Override
 	public PageObjectBuilder createPageObjectBuilder(){
-		PageObjectFactoryImpl result = new PageObjectFactoryImpl(
-				new FieldFactoryImpl(
-						getBrowser(),
-						getStateObject(),
-						new FileFieldFactoryImpl(getBrowser())
-					)
+		MatryoshkaDollFactory<PageObjectBuilderSymbolTable, ProxyPageObjectBuilderAdapter> m = new MatryoshkaDollFactory<PageObjectBuilderSymbolTable,ProxyPageObjectBuilderAdapter>();
+		PageObjectBuilderSymbolTable result = m.create(
+				new PageObjectFactoryImpl(
+						ElFactory.createFieldFactory(
+							new FieldFactoryImpl(
+								getBrowser(),
+								getStateObject(),
+								new FileFieldFactoryImpl(getBrowser())
+							)
+						)
+				),
+				ReadabilityImplementationFactory.createReadabilityBuilder(getWebDriver())
 		);
 		return result.startBuild( 
 				new PageObjectImpl(
 						new ClickableContainerImpl(),
 						new FieldContainerImpl(),
-						new AssertivePageObjectImpl(getWebDriver())
+						new AssertivenessImpl(getWebDriver())
 				)
 		);
 	}
 	
 	@Override
-	public StatePageObject getStateObject(){
-		if(this.state==null)
-			state = new StatePageObjectImpl(repository);
+	public StatePageObjectSymbolTable getStateObject(){
+		if(this.state!=null)
+			return state;
+		MatryoshkaDollFactory<StatePageObjectSymbolTable, ProxyStatePageObjectAdapter> m = new MatryoshkaDollFactory<StatePageObjectSymbolTable,ProxyStatePageObjectAdapter>();
+		state= m.create(
+				new StatePageObjectImpl(repository),
+				ReadabilityImplementationFactory.createReadabilityStatePageObject(),
+				ElFactory.createElContextStatePageObject()
+		);
 		return state;
 	}
 	

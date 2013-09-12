@@ -8,18 +8,22 @@ import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.StatePageObject;
 import com.github.pageobject.impl.PageObjectFactoryImpl;
 import com.github.pageobject.impl.PageObjectImpl;
+import com.github.pageobject.impl.ProxyStatePageObjectAdapter;
 import com.github.pageobject.impl.SerialPageObjectBuilder;
-import com.github.pageobject.impl.assertivepageobject.AssertivePageObjectImpl;
+import com.github.pageobject.impl.StatePageObjectSymbolTable;
+import com.github.pageobject.impl.assertivepageobject.AssertivenessImpl;
 import com.github.pageobject.impl.browser.Browser;
 import com.github.pageobject.impl.field.ClickableContainerImpl;
 import com.github.pageobject.impl.field.FieldContainerImpl;
 import com.github.pageobject.impl.field.FieldFactoryImpl;
 import com.github.pageobject.impl.field.file.FileFieldFactoryImpl;
+import com.github.pageobject.impl.readability.ReadabilityImplementationFactory;
+import com.github.pageobject.proxy.MatryoshkaDollFactory;
 import com.github.pageobject.runner.PageObjectRepository;
 
 public class ELPageObjectBuilderFactory implements AbstractFactory{
 
-	private ElContext elContext;
+	private ElContextImpl elContext;
 	private DefaultFactory factory;
 	private SerialPageObjectBuilder serialPageObjectBuilder;
 	public ELPageObjectBuilderFactory(PageObjectRepository repo){
@@ -41,7 +45,7 @@ public class ELPageObjectBuilderFactory implements AbstractFactory{
 				new PageObjectImpl(
 					new ClickableContainerImpl(),
 					new FieldContainerImpl(),
-					new AssertivePageObjectImpl(factory.getWebDriver())
+					new AssertivenessImpl(factory.getWebDriver())
 				)		
 		);
 	}
@@ -61,14 +65,18 @@ public class ELPageObjectBuilderFactory implements AbstractFactory{
 
 	@Override
 	public StatePageObject getStateObject() {
-		return getElContext();
+		MatryoshkaDollFactory<StatePageObjectSymbolTable, ProxyStatePageObjectAdapter> m = new MatryoshkaDollFactory<StatePageObjectSymbolTable,ProxyStatePageObjectAdapter>();
+		return m.create(
+				factory.getStateObject(),
+				ReadabilityImplementationFactory.createReadabilityStatePageObject(),
+				getElContext()
+		);
 	}
 	
-	private ElContext getElContext(){
+	private ElContextImpl getElContext(){
 		if(elContext!=null)
 			return elContext;
 		elContext = new ElContextImpl(
-				factory.getStateObject(),
 				new MapContext(),
 				new JexlExpressionFactoryImpl()
 		);

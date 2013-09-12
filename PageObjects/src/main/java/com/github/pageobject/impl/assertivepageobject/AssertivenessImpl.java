@@ -6,11 +6,11 @@ import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AssertivePageObjectImpl implements Assertiveness{
+public class AssertivenessImpl implements Assertiveness{
 	private WebDriver driver;
 	private Map<String,String> db;
 	
-	public AssertivePageObjectImpl(WebDriver webDriver){
+	public AssertivenessImpl(WebDriver webDriver){
 		this.driver = webDriver;
 		this.db=new HashMap<String, String>();
 	}

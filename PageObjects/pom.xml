@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.pageobjects</groupId>
-	<artifactId>page-objecs</artifactId>
+	<artifactId>page-objects</artifactId>
 	<version>1.2.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -27,33 +27,33 @@
 	</repositories>
 	<build>
 		<plugins>
-		<plugin>
-		        <artifactId>maven-compiler-plugin</artifactId>
-		        <configuration>
-		                <source>1.7</source>
-		                <target>1.7</target>
-		             
-		        </configuration>
-		    </plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
-<dependency>
-    <groupId>org.seleniumhq.selenium</groupId>
-    <artifactId>selenium-java</artifactId>
-    <version>2.35.0</version>
-</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>2.35.0</version>
+		</dependency>
 		<dependency>
 			<scope>compile</scope>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-jexl</artifactId>
 			<version> 2.1.1</version>
 		</dependency>
-<dependency>
-    <groupId>com.google.guava</groupId>
-    <artifactId>guava-jdk5</artifactId>
-    <version>14.0.1</version>
-</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava-jdk5</artifactId>
+			<version>14.0.1</version>
+		</dependency>
 		<dependency>
 			<scope>test</scope>
 			<groupId>junit</groupId>

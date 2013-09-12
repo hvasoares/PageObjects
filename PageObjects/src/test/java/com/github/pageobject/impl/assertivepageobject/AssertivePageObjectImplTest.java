@@ -14,13 +14,13 @@ public class AssertivePageObjectImplTest {
 
 	private Mockery ctx;
 	private IncompletePageObject inner;
-	private AssertivePageObjectImpl inst;
+	private AssertivenessImpl inst;
 	private WebDriver driver;
 
 	@Before
 	public void setUp() {
 		ctx  = new Mockery();
-		inst = new AssertivePageObjectImpl(
+		inst = new AssertivenessImpl(
 				driver = ctx.mock(WebDriver.class)
 		);
 	}

@@ -3,7 +3,7 @@ package com.github.pageobject.impl;
 import com.github.pageobject.PageObject;
 import com.github.pageobject.proxy.ProxyPageObjectAdapter;
 
-public class ErrorHandlerPage extends ProxyPageObjectAdapter {
+public class ErrorHandlerPage extends PageObjectSymbolTable {
 	private PageObject innerPage;
 		
 	public ErrorHandlerPage(PageObject innerPage) {

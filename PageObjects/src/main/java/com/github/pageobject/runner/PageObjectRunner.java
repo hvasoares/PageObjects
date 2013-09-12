@@ -6,7 +6,7 @@ import org.junit.runner.notification.RunNotifier;
 
 import com.github.jsteak.JSteakRunnerBuilder;
 import com.github.pageobject.AbstractFactory;
-import com.github.pageobject.impl.el.ELPageObjectBuilderFactory;
+import com.github.pageobject.DefaultFactory;
 
 public class PageObjectRunner extends Runner {
 	private JSteakRunnerBuilder steakRunner;
@@ -21,7 +21,7 @@ public class PageObjectRunner extends Runner {
 				objConst, 
 				clazz
 		);
-		factory = new ELPageObjectBuilderFactory(
+		factory = new DefaultFactory(
 				descriptionGetter.getRepository()
 		);
 		steakRunner.setDefaultClassUtil(new ClassReflectionUtilsImpl(

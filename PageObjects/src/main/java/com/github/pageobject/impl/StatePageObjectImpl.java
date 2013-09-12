@@ -9,7 +9,7 @@ import com.github.pageobject.AssertivePageObject;
 import com.github.pageobject.PageObject;
 import com.github.pageobject.StatePageObject;
 import com.github.pageobject.runner.PageObjectRepository;
-public class StatePageObjectImpl implements StatePageObject{
+public class StatePageObjectImpl extends StatePageObjectSymbolTable{
 	private Map<String,PageObject> allStates;
 	private PageObject now;
 	private PageObjectRepository repo;

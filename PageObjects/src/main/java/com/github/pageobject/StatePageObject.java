@@ -1,5 +1,7 @@
 package com.github.pageobject;
 
+import com.github.pageobject.impl.Readability;
+
 
 
 public interface StatePageObject {
@@ -11,6 +13,8 @@ public interface StatePageObject {
 	StatePageObject click(String alias);
 
 	StatePageObject fill(String field, String value);
+	
+	Readability readability();
 
 	String getName();
 

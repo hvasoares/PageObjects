@@ -7,7 +7,9 @@ public class FirefoxWebDriverFactory implements WebDriverFactory{
 
 	@Override
 	public WebDriver create() {
-		return new FirefoxDriver();
+		FirefoxDriver result = new FirefoxDriver();
+		result.manage().window().maximize();
+		return result;
 	}
 
 }

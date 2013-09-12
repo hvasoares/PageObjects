@@ -1,5 +1,6 @@
 package com.github.pageobject;
 
+import com.github.pageobject.impl.Readability;
 import com.github.pageobject.impl.field.CustomField;
 
 public interface PageObjectBuilder {
@@ -19,5 +20,7 @@ public interface PageObjectBuilder {
 	PageObjectBuilder addCustomField(CustomField custom);
 
 	PageObjectBuilder addNamedAssert(String name, String xpath);
+	
+	Readability readability();
 
 }

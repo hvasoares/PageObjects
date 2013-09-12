@@ -7,19 +7,19 @@ import org.apache.commons.jexl2.JexlContext;
 
 import com.github.pageobject.PageObject;
 import com.github.pageobject.StatePageObject;
+import com.github.pageobject.impl.ProxyStatePageObjectAdapter;
 import com.github.pageobject.impl.StatePageObjectImpl;
+import com.github.pageobject.impl.StatePageObjectSymbolTable;
 
-public class ElContextImpl implements ElContext {
-	private StatePageObject inner;
+public class ElContextImpl extends ProxyStatePageObjectAdapter implements ElContext {
+	
 	private JexlContext jexlContext;
 	private JexlExpressionFactory expressionFactory;
 	private Map<String,Map<String,String>> statePageMaps;
 	private String current;
 	
-	public ElContextImpl(StatePageObject inner, JexlContext jexlContext,
+	public ElContextImpl(JexlContext jexlContext,
 			JexlExpressionFactory expressionFactory) {
-		super();
-		this.inner = inner;
 		this.jexlContext = jexlContext;
 		this.expressionFactory = expressionFactory;
 		statePageMaps = new HashMap<String, Map<String,String>>();
@@ -27,7 +27,7 @@ public class ElContextImpl implements ElContext {
 
 	@Override
 	public void setState(String stateName) {
-		inner.setState(stateName);
+		getInner().setState(stateName);
 		setCurrentName(stateName);
 		jexlContext.set(stateName,getCurrentMap());
 	}
@@ -57,20 +57,7 @@ public class ElContextImpl implements ElContext {
 
 	public StatePageObject fill(String field, String value) { 
 		assign(field,evaluate(value));
-		return inner.fill(field,evaluate(value));
-	}
-
-	public StatePageObject click(String string) {
-		return inner.click(string);
-	}
-
-	public String getName() {
-		return inner.getName();
-	}
-
-	@Override
-	public StatePageObject checkAssertion(String namedAssertion) {
-		return inner.checkAssertion(namedAssertion);
+		return getInner().fill(field,evaluate(value));
 	}
 	
 }

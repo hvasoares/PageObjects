@@ -1,43 +1,49 @@
 package com.github.pageobject.impl.el;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 
 import org.apache.commons.jexl2.JexlContext;
 import org.jmock.Expectations;
-import org.jmock.Mockery;
+import org.jmock.auto.Mock;
+import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.jmock.lib.legacy.ClassImposteriser;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.github.pageobject.StatePageObject;
+import com.github.pageobject.impl.ProxyStatePageObjectAdapter;
+import com.github.pageobject.impl.StatePageObjectSymbolTable;
+import com.github.pageobject.proxy.MatryoshkaDollFactory;
 
 public class ElContextImplTest {
 
 	private ElContextImpl inst;
-	private StatePageObject stateMachine;
-	private Mockery ctx;
-	private JexlContext mapContext;
-	private JexlExpressionFactory unifiedEl;
+	@Mock private StatePageObject stateMachine;
+	@Rule public JUnitRuleMockery ctx = new JUnitRuleMockery(){{
+		setImposteriser(ClassImposteriser.INSTANCE);
+	}};
+	@Mock private JexlContext mapContext;
+	@Mock private JexlExpressionFactory unifiedEl;
+	private MatryoshkaDollFactory<StatePageObjectSymbolTable, ProxyStatePageObjectAdapter> russianDoll;
+	@Mock private StatePageObjectSymbolTable realObject;
+	private StatePageObjectSymbolTable result;
 
 	@Test
 	public void givenAPageShouldAssignItFieldsToAMap() {
-		ctx = new Mockery(){{
-			setImposteriser(ClassImposteriser.INSTANCE);
-		}};
-		stateMachine = ctx.mock(StatePageObject.class);
-		mapContext = ctx.mock(JexlContext.class);
-		unifiedEl = ctx.mock(JexlExpressionFactory.class);
 		inst = new ElContextImpl(
-				stateMachine,
 				mapContext,
 				unifiedEl
 		);
 		
+		russianDoll = new MatryoshkaDollFactory<StatePageObjectSymbolTable,ProxyStatePageObjectAdapter>();
+		result = russianDoll.create(realObject, inst);
+		
 		ctx.checking(new Expectations(){{
-			oneOf(stateMachine).setState("somePage");
-			oneOf(stateMachine).fill("someField","someValueEvaluated");
+			oneOf(realObject).setState("somePage");
+			oneOf(realObject).fill("someField","someValueEvaluated");
 			oneOf(mapContext).set(
 					with(is("somePage")),
 					with(any(HashMap.class))
@@ -46,8 +52,8 @@ public class ElContextImplTest {
 			will(returnValue("someValueEvaluated"));
 		}});
 		
-		inst.setState("somePage");
-		inst.fill("someField","someValue");
+		result.setState("somePage");
+		result.fill("someField","someValue");
 		
 		ctx.assertIsSatisfied();
 		

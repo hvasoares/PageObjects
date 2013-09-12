@@ -5,7 +5,7 @@ import com.github.pageobject.PageObject;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.impl.field.CustomField;
 
-public class PageObjectFactoryImpl implements PageObjectBuilder,WaitingStartFactory {
+public class PageObjectFactoryImpl extends PageObjectBuilderSymbolTable{
 
 	private FieldFactory fieldFactory;
 	private IncompletePageObject object;
