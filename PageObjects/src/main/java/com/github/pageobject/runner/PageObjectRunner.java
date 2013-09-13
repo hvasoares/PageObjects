@@ -1,5 +1,7 @@
 package com.github.pageobject.runner;
 
+import javax.swing.JOptionPane;
+
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;

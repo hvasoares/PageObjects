@@ -8,51 +8,60 @@ import com.github.pageobject.proxy.DecoratorObject;
 
 public class ProxyPageObjectBuilderAdapter extends PageObjectBuilderSymbolTable implements DecoratorObject<PageObjectBuilderSymbolTable> {
 
-	protected PageObjectBuilderSymbolTable inner;
+	private PageObjectBuilderSymbolTable inner;
 
 	public PageObjectBuilder addClickable(String string, String string2) {
-		return inner.addClickable(string, string2);
+		getInner().addClickable(string, string2);
+		return this;
 	}
 
 	public PageObjectBuilder startBuild(IncompletePageObject pageObject) {
-		return inner.startBuild(pageObject);
+		getInner().startBuild(pageObject);
+		return this;
 	}
 
 	public PageObjectBuilder addTextField(String string, String string2) {
-		return inner.addTextField(string, string2);
+		getInner().addTextField(string, string2);
+		return this;
+
 	}
 
 	public PageObject get() {
-		return inner.get();
+		return getInner().get();
 	}
 
-	public PageObjectBuilder addClickable(String alias, String xpath,
-			String toPage) {
-		return inner.addClickable(alias, xpath, toPage);
+	public PageObjectBuilder addClickable(String alias, String xpath,String toPage) {
+		getInner().addClickable(alias, xpath, toPage);
+		return this;
+
 	}
 
 	public PageObjectBuilder setName(String value) {
-		return inner.setName(value);
+		getInner().setName(value);
+		return this;
 	}
 
 	public PageObjectBuilder addFileField(String string, String string2) {
-		return inner.addFileField(string, string2);
+		getInner().addFileField(string, string2);
+		return this;
 	}
 
 	public PageObjectBuilder addCustomField(CustomField custom) {
-		return inner.addCustomField(custom);
+		getInner().addCustomField(custom);
+		return this;
 	}
 
 	public PageObjectBuilder addNamedAssert(String name, String xpath) {
-		return inner.addNamedAssert(name, xpath);
+		getInner().addNamedAssert(name, xpath);
+		return this;
 	}
 
 	public boolean equals(Object obj) {
-		return inner.equals(obj);
+		return getInner().equals(obj);
 	}
 
 	public String toString() {
-		return inner.toString();
+		return getInner().toString();
 	}
 
 	public PageObjectBuilderSymbolTable getInner() {

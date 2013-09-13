@@ -1,6 +1,6 @@
 package com.github.pageobject.impl.readability;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +13,7 @@ public class ReadabilityImpl implements Readability{
 
 	private Map<String,String> db;
 	private WebDriver driver;
+	private String result;
 	
 	public ReadabilityImpl(WebDriver webDriver) {
 		this.db = new HashMap<String, String>();
@@ -23,14 +24,12 @@ public class ReadabilityImpl implements Readability{
 	public String read(String propertyName) {
 		checkNotNull(this.db.get(propertyName),"Property '"+propertyName+"' not found.");
 		try{
-			return checkNotNull(
-					driver.findElement(By.xpath(db.get(propertyName)))
-					.getText()
-				);
+			return	checkNotNull(
+				driver.findElement(By.xpath(db.get(propertyName))).getAttribute("value")
+			);
 		}catch(NullPointerException ex){
 			return checkNotNull(
-					driver.findElement(By.xpath(db.get(propertyName)))
-					.getAttribute("value")
+					driver.findElement(By.xpath(db.get(propertyName))).getText()
 				);	
 		}
 	}

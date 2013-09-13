@@ -1,5 +1,8 @@
 package com.github.pageobject;
 
+import javax.management.RuntimeErrorException;
+import javax.swing.JOptionPane;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.pageobject.impl.PageObjectBuilderSymbolTable;
@@ -19,7 +22,6 @@ import com.github.pageobject.impl.field.ClickableContainerImpl;
 import com.github.pageobject.impl.field.FieldContainerImpl;
 import com.github.pageobject.impl.field.FieldFactoryImpl;
 import com.github.pageobject.impl.field.file.FileFieldFactoryImpl;
-import com.github.pageobject.impl.readability.ReadabilityBuilder;
 import com.github.pageobject.impl.readability.ReadabilityImplementationFactory;
 import com.github.pageobject.impl.webdriver.FirefoxWebDriverFactory;
 import com.github.pageobject.impl.webdriver.WebDriverFactory;
@@ -31,6 +33,7 @@ public class DefaultFactory implements AbstractFactory{
 	private Browser browser;
 	private PageObjectRepository repository;
 	private WebDriver driver;
+	private SerialPageObjectBuilder serialBuilder;
 
 	public DefaultFactory(PageObjectRepository repository) {
 		this.repository = repository;
@@ -84,7 +87,10 @@ public class DefaultFactory implements AbstractFactory{
 
 	@Override
 	public SerialPageObjectBuilder createSerialPageObjectBuilder() {
-		return new SerialPageObjectBuilder(this);
+		if(serialBuilder!=null)
+			return serialBuilder;
+		serialBuilder = new SerialPageObjectBuilder(this);
+		return serialBuilder;
 	}
 	public WebDriver getWebDriver(){
 		if(driver!=null)

@@ -3,6 +3,8 @@ package com.github.pageobject.impl.el;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import org.apache.commons.jexl2.JexlContext;
 
 import com.github.pageobject.PageObject;
@@ -27,9 +29,9 @@ public class ElContextImpl extends ProxyStatePageObjectAdapter implements ElCont
 
 	@Override
 	public void setState(String stateName) {
-		getInner().setState(stateName);
 		setCurrentName(stateName);
 		jexlContext.set(stateName,getCurrentMap());
+		getInner().setState(stateName);
 	}
 	
 	public Map<String,String> getCurrentMap() {

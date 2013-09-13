@@ -10,16 +10,22 @@ public abstract class ReadabilityImplementationFactory {
 	private static ReadabilityBuilder readabilityBuilder;
 
 	public static ProxyStatePageObjectAdapter createReadabilityStatePageObject(){
-		if(context!=null)
-			return context;
-		return context = new ReadabilityContextImpl();
+		return createReadabilityContextImpl();
 	}
 	
 	public static ProxyPageObjectBuilderAdapter createReadabilityBuilder(WebDriver webDriver){
+		if(context==null)
+			createReadabilityStatePageObject();
 		if(readabilityBuilder!=null)
 			return readabilityBuilder;
 		readabilityBuilder = new ReadabilityBuilder(webDriver);
-		readabilityBuilder.setReadabilitCtx(context= new ReadabilityContextImpl());
+		readabilityBuilder.setReadabilitCtx(createReadabilityContextImpl());
 		return readabilityBuilder;
+	}
+	
+	private static ReadabilityContextImpl createReadabilityContextImpl(){
+		if(context!=null)
+			return context;
+		return context = new ReadabilityContextImpl();
 	}
 }

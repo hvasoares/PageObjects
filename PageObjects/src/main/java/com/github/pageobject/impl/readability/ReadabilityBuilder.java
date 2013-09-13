@@ -1,5 +1,7 @@
 package com.github.pageobject.impl.readability;
 
+import javax.swing.JOptionPane;
+
 import org.openqa.selenium.WebDriver;
 
 import com.github.pageobject.PageObjectBuilder;
@@ -18,7 +20,8 @@ public class ReadabilityBuilder extends ProxyPageObjectBuilderAdapter{
 	@Override
 	public PageObjectBuilder addTextField(String fieldName, String xpath) {
 		current.setProperty(fieldName, xpath);
-		return getInner().addTextField(fieldName, xpath);
+		getInner().addTextField(fieldName, xpath);
+		return this;
 	}
 
 	@Override
@@ -26,7 +29,7 @@ public class ReadabilityBuilder extends ProxyPageObjectBuilderAdapter{
 		current = new ReadabilityImpl(driver);
 		readabilitCtx.add(value,current);
 		setReadability(current);
-		return getInner().setName(value);
+		return super.setName(value);
 	}
 	
 	void setReadabilitCtx(ReadabilityContext readabilitCtx) {

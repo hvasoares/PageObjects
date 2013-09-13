@@ -21,17 +21,17 @@ import com.github.pageobject.impl.readability.ReadabilityImplementationFactory;
 import com.github.pageobject.proxy.MatryoshkaDollFactory;
 import com.github.pageobject.runner.PageObjectRepository;
 
-public class ELPageObjectBuilderFactory implements AbstractFactory{
+public class ELPageObjectBuilderFactory{
 
 	private ElContextImpl elContext;
 	private DefaultFactory factory;
 	private SerialPageObjectBuilder serialPageObjectBuilder;
 	public ELPageObjectBuilderFactory(PageObjectRepository repo){
 		factory = new DefaultFactory(repo);
-		repo.setBuilderFactory(this);
+	//	repo.setBuilderFactory(this);
 	}
 
-	@Override
+	
 	public PageObjectBuilder createPageObjectBuilder() {
 		return new PageObjectFactoryImpl(
 				new ElFieldFactory(
@@ -50,20 +50,12 @@ public class ELPageObjectBuilderFactory implements AbstractFactory{
 		);
 	}
 
-	@Override
-	public SerialPageObjectBuilder createSerialPageObjectBuilder() {
-		if(serialPageObjectBuilder!=null)
-			return serialPageObjectBuilder;
-		this.serialPageObjectBuilder= new SerialPageObjectBuilder(this);
-		return serialPageObjectBuilder;
-	}
-
-	@Override
+	
 	public Browser getBrowser() {
 		return factory.getBrowser();
 	}
 
-	@Override
+	
 	public StatePageObject getStateObject() {
 		MatryoshkaDollFactory<StatePageObjectSymbolTable, ProxyStatePageObjectAdapter> m = new MatryoshkaDollFactory<StatePageObjectSymbolTable,ProxyStatePageObjectAdapter>();
 		return m.create(

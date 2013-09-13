@@ -5,6 +5,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import com.github.pageobject.AssertivePageObject;
 import com.github.pageobject.PageObject;
 import com.github.pageobject.StatePageObject;

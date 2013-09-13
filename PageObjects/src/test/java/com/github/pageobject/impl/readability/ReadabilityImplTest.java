@@ -27,7 +27,7 @@ public class ReadabilityImplTest {
 			oneOf(webDriver).findElement(By.xpath("//someXpath"));
 			will(returnValue(element));
 			
-			oneOf(element).getText();
+			oneOf(element).getAttribute("value");
 			will(returnValue("valueOfProperty"));
 		}});
 		
@@ -41,10 +41,10 @@ public class ReadabilityImplTest {
 			exactly(2).of(webDriver).findElement(By.xpath("//someXpath"));
 			will(returnValue(element));
 			
-			oneOf(element).getText();
+			oneOf(element).getAttribute("value");
 			will(returnValue(null));
 			
-			oneOf(element).getAttribute("value");
+			oneOf(element).getText();
 			will(returnValue("valueOfPropertyFromAttributeValue"));
 			
 		}});

@@ -3,10 +3,13 @@ package com.github.pageobject.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import com.github.pageobject.AssertivePageObject;
 import com.github.pageobject.PageObject;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.PageObjectBuilderFactory;
+import com.github.pageobject.impl.readability.ReadabilityBuilder;
 
 public class SerialPageObjectBuilder {
 	private List<PageObject> all;
@@ -17,8 +20,9 @@ public class SerialPageObjectBuilder {
 		this.factory = factory;
 	}
 	public PageObjectBuilder newPage(String name){
-		if(current!=null)
+		if(current!=null){
 			all.add(current.get());
+		}
 		current = factory.createPageObjectBuilder();
 		current.setName(name);
 		return current;
