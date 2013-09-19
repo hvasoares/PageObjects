@@ -1,10 +1,10 @@
 package com.github.pageobject;
 
-import javax.management.RuntimeErrorException;
-import javax.swing.JOptionPane;
-
 import org.openqa.selenium.WebDriver;
 
+import com.github.pageobject.impl.ActualFieldFactoryGetter;
+import com.github.pageobject.impl.FieldFactory;
+import com.github.pageobject.impl.LazyFieldFactory;
 import com.github.pageobject.impl.PageObjectBuilderSymbolTable;
 import com.github.pageobject.impl.PageObjectFactoryImpl;
 import com.github.pageobject.impl.PageObjectImpl;
@@ -22,18 +22,20 @@ import com.github.pageobject.impl.field.ClickableContainerImpl;
 import com.github.pageobject.impl.field.FieldContainerImpl;
 import com.github.pageobject.impl.field.FieldFactoryImpl;
 import com.github.pageobject.impl.field.file.FileFieldFactoryImpl;
+import com.github.pageobject.impl.mutability.MutabilityImplementationFactory;
 import com.github.pageobject.impl.readability.ReadabilityImplementationFactory;
 import com.github.pageobject.impl.webdriver.FirefoxWebDriverFactory;
 import com.github.pageobject.impl.webdriver.WebDriverFactory;
 import com.github.pageobject.proxy.MatryoshkaDollFactory;
 import com.github.pageobject.runner.PageObjectRepository;
 
-public class DefaultFactory implements AbstractFactory{
-	private StatePageObjectSymbolTable state;
+public class DefaultFactory implements AbstractFactory, ActualFieldFactoryGetter{
+	private StatePageObject state;
 	private Browser browser;
 	private PageObjectRepository repository;
 	private WebDriver driver;
 	private SerialPageObjectBuilder serialBuilder;
+	private FieldFactory fieldFactory;
 
 	public DefaultFactory(PageObjectRepository repository) {
 		this.repository = repository;
@@ -45,15 +47,10 @@ public class DefaultFactory implements AbstractFactory{
 		MatryoshkaDollFactory<PageObjectBuilderSymbolTable, ProxyPageObjectBuilderAdapter> m = new MatryoshkaDollFactory<PageObjectBuilderSymbolTable,ProxyPageObjectBuilderAdapter>();
 		PageObjectBuilderSymbolTable result = m.create(
 				new PageObjectFactoryImpl(
-						ElFactory.createFieldFactory(
-							new FieldFactoryImpl(
-								getBrowser(),
-								getStateObject(),
-								new FileFieldFactoryImpl(getBrowser())
-							)
-						)
+						getLazyFieldFactory()
 				),
-				ReadabilityImplementationFactory.createReadabilityBuilder(getWebDriver())
+				ReadabilityImplementationFactory.createReadabilityBuilder(getWebDriver()),
+				MutabilityImplementationFactory.createPageBuilder(getLazyFieldFactory())
 		);
 		return result.startBuild( 
 				new PageObjectImpl(
@@ -63,16 +60,21 @@ public class DefaultFactory implements AbstractFactory{
 				)
 		);
 	}
+
+	private FieldFactory getLazyFieldFactory() {
+		return new LazyFieldFactory(this);
+	}
 	
 	@Override
-	public StatePageObjectSymbolTable getStateObject(){
+	public StatePageObject getStateObject(){
 		if(this.state!=null)
 			return state;
-		MatryoshkaDollFactory<StatePageObjectSymbolTable, ProxyStatePageObjectAdapter> m = new MatryoshkaDollFactory<StatePageObjectSymbolTable,ProxyStatePageObjectAdapter>();
+		MatryoshkaDollFactory<StatePageObject, ProxyStatePageObjectAdapter> m = new MatryoshkaDollFactory<StatePageObject,ProxyStatePageObjectAdapter>();
 		state= m.create(
 				new StatePageObjectImpl(repository),
 				ReadabilityImplementationFactory.createReadabilityStatePageObject(),
-				ElFactory.createElContextStatePageObject()
+				ElFactory.createElContextStatePageObject(),
+				MutabilityImplementationFactory.createStatePageObject(getLazyFieldFactory())
 		);
 		return state;
 	}
@@ -81,7 +83,7 @@ public class DefaultFactory implements AbstractFactory{
 	public Browser getBrowser(){
 		if(this.browser!=null)
 			return browser;
-		browser =new RetryBrowser(new BrowserImpl(getWebDriver()));
+		browser = new BrowserImpl(getWebDriver());
 		return browser;
 	}
 
@@ -98,5 +100,17 @@ public class DefaultFactory implements AbstractFactory{
 		WebDriverFactory factory = new FirefoxWebDriverFactory();
 		driver = factory.create();
 		return driver;
+	}
+
+	@Override
+	public FieldFactory getFieldFactory() {
+		fieldFactory= ElFactory.createFieldFactory(
+				new FieldFactoryImpl(
+					getBrowser(),
+					getStateObject(),
+					new FileFieldFactoryImpl(getBrowser())
+				)
+			);
+		return fieldFactory;
 	}
 }
