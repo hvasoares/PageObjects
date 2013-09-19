@@ -57,7 +57,7 @@ public class ELPageObjectBuilderFactory{
 
 	
 	public StatePageObject getStateObject() {
-		MatryoshkaDollFactory<StatePageObjectSymbolTable, ProxyStatePageObjectAdapter> m = new MatryoshkaDollFactory<StatePageObjectSymbolTable,ProxyStatePageObjectAdapter>();
+		MatryoshkaDollFactory<StatePageObject, ProxyStatePageObjectAdapter> m = new MatryoshkaDollFactory<StatePageObject,ProxyStatePageObjectAdapter>();
 		return m.create(
 				factory.getStateObject(),
 				ReadabilityImplementationFactory.createReadabilityStatePageObject(),

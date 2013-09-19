@@ -9,6 +9,7 @@ import com.github.pageobject.proxy.DecoratorObject;
 public class ProxyPageObjectBuilderAdapter extends PageObjectBuilderSymbolTable implements DecoratorObject<PageObjectBuilderSymbolTable> {
 
 	private PageObjectBuilderSymbolTable inner;
+	private DecoratorObject<PageObjectBuilderSymbolTable> outer;
 
 	public PageObjectBuilder addClickable(String string, String string2) {
 		getInner().addClickable(string, string2);
@@ -64,16 +65,28 @@ public class ProxyPageObjectBuilderAdapter extends PageObjectBuilderSymbolTable 
 		return getInner().toString();
 	}
 
-	public PageObjectBuilderSymbolTable getInner() {
+	public final PageObjectBuilderSymbolTable getInner() {
 		return inner;
 	}
 
-	public void setInner(PageObjectBuilderSymbolTable inner) {
+	public final void setInner(PageObjectBuilderSymbolTable inner) {
 		this.inner = inner;
 	}
 	
-	public PageObjectBuilderSymbolTable self(){
+	public final PageObjectBuilderSymbolTable self(){
 		return this;
+	}
+
+	@Override
+	public final void setOuter(DecoratorObject<PageObjectBuilderSymbolTable> value) {
+		this.outer = value;
+	}
+
+	@Override
+	public final PageObjectBuilderSymbolTable getOuter() {
+		if(outer==null)
+			return this;
+		return outer.getOuter();
 	}
 	
 	

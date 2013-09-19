@@ -21,8 +21,8 @@ public class FieldContainerImpl implements FieldContainer{
 		try{
 			chosen.fill(value);
 		}catch(Throwable ex){
-			throw new RuntimeException("Couldn't fill the field " + aliase 
-					+ " with " + value,ex);
+			throw new RuntimeException("Couldn't fill the field '" + aliase 
+					+ "' with '" + value+"'",ex);
 		}
 	}
 

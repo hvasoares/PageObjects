@@ -22,7 +22,10 @@ public class FieldFactoryImpl implements FieldFactory{
 
 	@Override
 	public Field createTextField(String alias, String xpath) {
-		return new TextField(alias,xpath,browser);
+		return new EraseBeforeFillTextField(
+				new TextField(alias,xpath,browser),
+				machine
+		);
 	}
 
 	@Override

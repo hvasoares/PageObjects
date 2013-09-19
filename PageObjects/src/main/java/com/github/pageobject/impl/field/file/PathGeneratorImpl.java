@@ -10,8 +10,9 @@ import org.apache.commons.io.IOUtils;
 public class PathGeneratorImpl implements PathGenerator{
 	@Override
 	public String generateFromResourceName(String resourceName) {
-		String name = resourceName.split("\\.")[0];
-		String extension = resourceName.split("\\.")[1];
+		String[] resourceSplited = resourceName.split("\\.");
+		String name = resourceName.split("\\.")[resourceSplited.length-2];
+		String extension = resourceName.split("\\.")[resourceSplited.length-1];
 		try {
 			File temp;
 			FileOutputStream out = new FileOutputStream(

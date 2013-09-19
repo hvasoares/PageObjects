@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 public class AssertivenessImpl implements Assertiveness{
 	private WebDriver driver;
 	private Map<String,String> db;
@@ -17,7 +16,7 @@ public class AssertivenessImpl implements Assertiveness{
 
 	@Override
 	public void pageAssertion(String xpath) {
-		driver.findElements(By.xpath(xpath));
+		driver.findElement(By.xpath(xpath));	
 	}
 
 	@Override

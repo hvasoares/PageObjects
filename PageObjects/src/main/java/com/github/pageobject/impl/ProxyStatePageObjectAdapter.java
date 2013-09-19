@@ -5,8 +5,9 @@ import javax.swing.JOptionPane;
 import com.github.pageobject.StatePageObject;
 import com.github.pageobject.proxy.DecoratorObject;
 
-public class ProxyStatePageObjectAdapter extends StatePageObjectSymbolTable implements DecoratorObject<StatePageObjectSymbolTable> {
-	private StatePageObjectSymbolTable inner;
+public class ProxyStatePageObjectAdapter extends StatePageObjectSymbolTable implements DecoratorObject<StatePageObject> {
+	private StatePageObject inner;
+	private DecoratorObject<StatePageObject> outer;
 
 	public StatePageObject checkAssertion(String namedAssertion) {
 		return getInner().checkAssertion(namedAssertion);
@@ -40,15 +41,28 @@ public class ProxyStatePageObjectAdapter extends StatePageObjectSymbolTable impl
 		return getInner().toString();
 	}
 
-	public StatePageObjectSymbolTable getInner() {
+	public StatePageObject getInner() {
 		return inner;
-	}
-
-	public void setInner(StatePageObjectSymbolTable inner) {
-		this.inner = inner;
 	}
 	
 	public StatePageObjectSymbolTable self(){
 		return this;
+	}
+
+	@Override
+	public final void setInner(StatePageObject value) {
+		this.inner = value;
+	}
+
+	@Override
+	public final void setOuter(DecoratorObject<StatePageObject> value) {
+		this.outer = value;
+	}
+
+	@Override
+	public final StatePageObject getOuter() {
+		if(outer ==null)
+			return this;
+		return outer.getOuter();
 	}
 }

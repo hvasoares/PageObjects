@@ -27,9 +27,9 @@ public class ElContextImplTest {
 	}};
 	@Mock private JexlContext mapContext;
 	@Mock private JexlExpressionFactory unifiedEl;
-	private MatryoshkaDollFactory<StatePageObjectSymbolTable, ProxyStatePageObjectAdapter> russianDoll;
-	@Mock private StatePageObjectSymbolTable realObject;
-	private StatePageObjectSymbolTable result;
+	private MatryoshkaDollFactory<StatePageObject, ProxyStatePageObjectAdapter> russianDoll;
+	@Mock private StatePageObject realObject;
+	private StatePageObject result;
 
 	@Test
 	public void givenAPageShouldAssignItFieldsToAMap() {
@@ -38,7 +38,7 @@ public class ElContextImplTest {
 				unifiedEl
 		);
 		
-		russianDoll = new MatryoshkaDollFactory<StatePageObjectSymbolTable,ProxyStatePageObjectAdapter>();
+		russianDoll = new MatryoshkaDollFactory<StatePageObject,ProxyStatePageObjectAdapter>();
 		result = russianDoll.create(realObject, inst);
 		
 		ctx.checking(new Expectations(){{

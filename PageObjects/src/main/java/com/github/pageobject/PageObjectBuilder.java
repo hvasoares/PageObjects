@@ -22,5 +22,6 @@ public interface PageObjectBuilder {
 	PageObjectBuilder addNamedAssert(String name, String xpath);
 	
 	Readability readability();
-
+	
+	Mutability mutability();
 }

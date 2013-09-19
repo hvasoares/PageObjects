@@ -1,7 +1,5 @@
 package com.github.pageobject.impl.readability;
 
-import javax.swing.JOptionPane;
-
 import org.openqa.selenium.WebDriver;
 
 import com.github.pageobject.PageObjectBuilder;
