@@ -18,4 +18,6 @@ public interface StatePageObject {
 
 	String getName();
 
+	Mutability mutability();
+
 }
