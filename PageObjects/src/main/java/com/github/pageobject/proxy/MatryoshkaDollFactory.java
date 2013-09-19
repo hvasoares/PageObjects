@@ -8,6 +8,7 @@ public class MatryoshkaDollFactory <T,S extends DecoratorObject<T>  >{
 		int i=0;
 		for(i = 0; i<proxies.length-1; i++){
 			proxies[i].setInner(proxies[i+1].self());
+			proxies[i+1].setOuter(proxies[i]);
 		}
 		
 		proxies[i].setInner(realObject);
