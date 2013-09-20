@@ -20,7 +20,7 @@ public class ProxyStatePageObjectTest {
 	@Mock private PageContextI context;
 	private MatryoshkaDollFactory<StatePageObject, ProxyStatePageObjectAdapter> m;
 	@Mock private StatePageObjectSymbolTable realObject;
-	@Mock private Mutability mutability; 
+	@Mock private MultiArgsClickable mutability; 
 	@Rule public JUnitRuleMockery ctx = new JUnitRuleMockery(){{
 		setImposteriser(ClassImposteriser.INSTANCE);
 	}};

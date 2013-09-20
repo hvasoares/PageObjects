@@ -3,13 +3,12 @@ package com.github.pageobject.impl.mutability;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.StatePageObject;
 
-public class Mutability implements com.github.pageobject.Mutability{
-
+public class Clickable implements ClickableI{
 
 	private ExecutionTimeI runtime;
 	private BuildTimeI build;
 
-	public Mutability(BuildTimeI buildTimeMutability,ExecutionTimeI runtimeMutability) {
+	public Clickable(BuildTimeI buildTimeMutability,ExecutionTimeI runtimeMutability) {
 		this.runtime = runtimeMutability;
 		this.build = buildTimeMutability;
 	}
@@ -26,6 +25,7 @@ public class Mutability implements com.github.pageobject.Mutability{
 		return build.getPageObjectBuilder();
 	}
 
+
 	@Override
 	public PageObjectBuilder extendsClickable(String... args) {
 		build.extendsClickable(args);
@@ -38,8 +38,14 @@ public class Mutability implements com.github.pageobject.Mutability{
 		return runtime.getStatePageObject();
 	}
 
+	@Override
 	public ExecutionTimeI getExecutionTime() {
 		return runtime;
+	}
+
+	@Override
+	public PageObjectBuilder getPageObjectBuilder() {
+		return build.getPageObjectBuilder();
 	}
 
 }

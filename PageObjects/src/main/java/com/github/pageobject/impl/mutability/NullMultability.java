@@ -1,5 +1,7 @@
 package com.github.pageobject.impl.mutability;
 
+import java.util.List;
+
 import com.github.pageobject.Mutability;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.StatePageObject;
@@ -30,6 +32,15 @@ public class NullMultability implements Mutability{
 
 	@Override
 	public StatePageObject click(String... args) {
+		throw new RuntimeException("There's no mutability named '"+pagename+"'");
+	}
+
+	@Override
+	public PageObjectBuilder addReadProperty(String alias, String xpath) {
+		throw new RuntimeException("There's no mutability named '"+pagename+"'");
+	}
+
+	public List<String> readAsList(String... args) {
 		throw new RuntimeException("There's no mutability named '"+pagename+"'");
 	}
 

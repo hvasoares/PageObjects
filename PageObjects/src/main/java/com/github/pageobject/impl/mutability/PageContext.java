@@ -2,15 +2,17 @@ package com.github.pageobject.impl.mutability;
 
 import java.util.HashMap;
 
+import com.github.pageobject.Mutability;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.StatePageObject;
 import com.github.pageobject.impl.FieldFactory;
+import com.github.pageobject.impl.readability.ReadabilityImplementationFactory;
 public class PageContext implements PageContextI{
-	private HashMap<String, Mutability> db;
+	private HashMap<String, MutabilityImpl> db;
 	private FieldFactory fieldFactory;
 
 	public PageContext(FieldFactory fieldFactory){
-		this.db = new HashMap<String,Mutability>();
+		this.db = new HashMap<String,MutabilityImpl>();
 		this.fieldFactory = fieldFactory;
 	}
 	
@@ -21,17 +23,23 @@ public class PageContext implements PageContextI{
 		buildTime.setCurrentBuilder(pageBuilder);
 		db.put(
 			contextName, 
-			new Mutability(
-				buildTime, 
-				new ExecutionTime(ctx)
+			new MutabilityImpl(
+					new Clickable(
+						buildTime, 
+						new ExecutionTime(ctx)
+					),
+					new MutableReadability(
+						ReadabilityImplementationFactory.createDetachedReadabilityFactory(), 
+						new FluidXpathFactory()
+					)
 			)
 		);
 		return db.get(contextName);
 	}
 
 	@Override
-	public com.github.pageobject.Mutability get(String pagename,StatePageObject state) {
-		Mutability result;
+	public Mutability get(String pagename,StatePageObject state) {
+		MutabilityImpl result;
 		if(db.containsKey(pagename)){
 			result = db.get(pagename);
 			result.getExecutionTime().setStateObject(state);

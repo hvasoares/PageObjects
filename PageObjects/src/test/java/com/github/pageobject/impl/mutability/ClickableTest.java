@@ -12,10 +12,10 @@ import org.openqa.selenium.internal.seleniumemulation.Click;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.StatePageObject;
 
-public class MutabilityTest {
+public class ClickableTest {
 
 	@Rule public JUnitRuleMockery ctx = new JUnitRuleMockery();
-	private Mutability instance;
+	private Clickable instance;
 	@Mock private BuildTimeI buildTime;
 	@Mock private PageObjectBuilder pageObjB;
 	@Mock private ExecutionTimeI executionTime;
@@ -25,7 +25,7 @@ public class MutabilityTest {
 	@Test
 	public void shouldGenerateClickablesGivenPlaceholders() {
 		
-		instance = new Mutability(buildTime,executionTime);
+		instance = new Clickable(buildTime,executionTime);
 		
 		ctx.checking(new Expectations(){{
 			oneOf(buildTime).add("someAlias","//:placeHolder","toPage");
@@ -50,7 +50,7 @@ public class MutabilityTest {
 	
 	@Test
 	public void shouldExtendClickables(){
-		instance = new Mutability(buildTime, executionTime);
+		instance = new Clickable(buildTime, executionTime);
 		ctx.checking(new Expectations(){{
 			oneOf(buildTime).extendsClickable(
 					"someAlias",
@@ -76,7 +76,7 @@ public class MutabilityTest {
 	
 	@Test
 	public void shouldClick(){
-		instance = new Mutability(buildTime, executionTime);
+		instance = new Clickable(buildTime, executionTime);
 		
 		ctx.checking(new Expectations(){{
 			oneOf(executionTime).getStatePageObject();

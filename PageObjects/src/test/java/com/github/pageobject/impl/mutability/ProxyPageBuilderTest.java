@@ -22,7 +22,7 @@ public class ProxyPageBuilderTest {
 	@Mock private PageObjectBuilderSymbolTable realObject;
 	@Mock private PageObjectBuilderSymbolTable outerPageBuilder;
 	@Mock private PageContextI context;
-	@Mock private Mutability mutability;
+	@Mock private MultiArgsClickable mutability;
 	@Mock private DecoratorObject<PageObjectBuilderSymbolTable> outerStateObject;
 
 	@Test

@@ -2,10 +2,13 @@ package com.github.pageobject.impl.mutability;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 class Utils {
@@ -24,5 +27,13 @@ class Utils {
 			result.put(Utils.returnIfMatchesExpression(array[i]), array[i+1]);
 		}
 		return result.entrySet();
+	}
+	
+	public static String[] copyAndConcatenate(String[] from,String ...newValues){
+		List<String> result = new ArrayList<String>( Arrays.asList(
+				Arrays.copyOf(from,from.length)
+		));
+		result.addAll(Arrays.asList(newValues));
+		return result.toArray(new String[from.length+newValues.length]);
 	}
 }
