@@ -12,16 +12,15 @@ import com.github.pageobject.impl.ProxyPageObjectBuilderAdapter;
 import com.github.pageobject.impl.ProxyStatePageObjectAdapter;
 import com.github.pageobject.impl.SerialPageObjectBuilder;
 import com.github.pageobject.impl.StatePageObjectImpl;
-import com.github.pageobject.impl.StatePageObjectSymbolTable;
 import com.github.pageobject.impl.assertivepageobject.AssertivenessImpl;
 import com.github.pageobject.impl.browser.Browser;
 import com.github.pageobject.impl.browser.BrowserImpl;
-import com.github.pageobject.impl.browser.RetryBrowser;
 import com.github.pageobject.impl.el.ElFactory;
 import com.github.pageobject.impl.field.ClickableContainerImpl;
 import com.github.pageobject.impl.field.FieldContainerImpl;
 import com.github.pageobject.impl.field.FieldFactoryImpl;
 import com.github.pageobject.impl.field.file.FileFieldFactoryImpl;
+import com.github.pageobject.impl.logging.LoggingFactory;
 import com.github.pageobject.impl.mutability.MutabilityImplementationFactory;
 import com.github.pageobject.impl.readability.ReadabilityImplementationFactory;
 import com.github.pageobject.impl.webdriver.FirefoxWebDriverFactory;
@@ -34,7 +33,7 @@ public class DefaultFactory implements AbstractFactory, ActualFieldFactoryGetter
 	private Browser browser;
 	private PageObjectRepository repository;
 	private WebDriver driver;
-	private SerialPageObjectBuilder serialBuilder;
+	private SerialPageObjectBuilderI serialBuilder;
 	private FieldFactory fieldFactory;
 
 	public DefaultFactory(PageObjectRepository repository) {
@@ -72,6 +71,7 @@ public class DefaultFactory implements AbstractFactory, ActualFieldFactoryGetter
 		MatryoshkaDollFactory<StatePageObject, ProxyStatePageObjectAdapter> m = new MatryoshkaDollFactory<StatePageObject,ProxyStatePageObjectAdapter>();
 		state= m.create(
 				new StatePageObjectImpl(repository),
+				LoggingFactory.createStatePageObjectLogging(),
 				ReadabilityImplementationFactory.createReadabilityStatePageObject(),
 				ElFactory.createElContextStatePageObject(),
 				MutabilityImplementationFactory.createStatePageObject(getLazyFieldFactory())
@@ -83,12 +83,14 @@ public class DefaultFactory implements AbstractFactory, ActualFieldFactoryGetter
 	public Browser getBrowser(){
 		if(this.browser!=null)
 			return browser;
-		browser = new BrowserImpl(getWebDriver());
+		browser = LoggingFactory.createBrowserLogging(
+			new BrowserImpl(getWebDriver())
+		);
 		return browser;
 	}
 
 	@Override
-	public SerialPageObjectBuilder createSerialPageObjectBuilder() {
+	public SerialPageObjectBuilderI createSerialPageObjectBuilder() {
 		if(serialBuilder!=null)
 			return serialBuilder;
 		serialBuilder = new SerialPageObjectBuilder(this);

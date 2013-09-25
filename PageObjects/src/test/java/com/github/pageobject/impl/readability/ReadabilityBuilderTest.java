@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.pageobject.impl.PageObjectBuilderSymbolTable;
 import com.github.pageobject.impl.ProxyPageObjectBuilderAdapter;
+import com.github.pageobject.impl.Readability;
 import com.github.pageobject.proxy.MatryoshkaDollFactory;
 
 public class ReadabilityBuilderTest {
@@ -23,6 +24,7 @@ public class ReadabilityBuilderTest {
 	}}; 
 	@Mock private PageObjectBuilderSymbolTable realObject;
 	@Mock private ReadabilityContext readabilitCtx;
+	@Mock private Readability previousReadability;
 
 	private PageObjectBuilderSymbolTable result;
 
@@ -37,8 +39,12 @@ public class ReadabilityBuilderTest {
 		result = russianDoll.create(realObject, instance);
 		
 		ctx.checking(new Expectations(){{
+			atLeast(2).of(readabilitCtx).get("somePageName");
+			will(onConsecutiveCalls(returnValue(null),returnValue(previousReadability)));
+			
 			oneOf(readabilitCtx).add(with("somePageName"), with(aNonNull(ReadabilityImpl.class)));
-			oneOf(realObject).setName("somePageName");
+			
+			atLeast(2).of(realObject).setName("somePageName");
 			oneOf(realObject).addTextField("field", "someXpath");
 		}});
 		
@@ -47,7 +53,12 @@ public class ReadabilityBuilderTest {
 		assertEquals(
 				instance.getCurrent().getDb().get("field"),"someXpath"
 		);
+		
 		assertEquals(instance.getCurrent(),result.readability());
+		
+		result.setName("somePageName");
+		
+		assertEquals(result.readability(),previousReadability);
 	}
 
 }

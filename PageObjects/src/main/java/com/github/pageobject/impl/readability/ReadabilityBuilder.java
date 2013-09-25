@@ -4,10 +4,11 @@ import org.openqa.selenium.WebDriver;
 
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.impl.ProxyPageObjectBuilderAdapter;
+import com.github.pageobject.impl.Readability;
 
 public class ReadabilityBuilder extends ProxyPageObjectBuilderAdapter{
 
-	private ReadabilityImpl current;
+	private Readability current;
 	private ReadabilityContext readabilitCtx;
 	private WebDriver driver;
 
@@ -24,8 +25,12 @@ public class ReadabilityBuilder extends ProxyPageObjectBuilderAdapter{
 
 	@Override
 	public PageObjectBuilder setName(String value) {
-		current = new ReadabilityImpl(driver);
-		readabilitCtx.add(value,current);
+		current = readabilitCtx.get(value); 
+		if(current==null){
+			current = new ReadabilityImpl(driver);
+			readabilitCtx.add(value,current);
+		}
+		
 		setReadability(current);
 		return super.setName(value);
 	}
@@ -34,7 +39,7 @@ public class ReadabilityBuilder extends ProxyPageObjectBuilderAdapter{
 		this.readabilitCtx = readabilitCtx;
 	}
 
-	ReadabilityImpl getCurrent() {
+	Readability getCurrent() {
 		return current;
 	}
 }

@@ -3,15 +3,12 @@ package com.github.pageobject.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
-import com.github.pageobject.AssertivePageObject;
 import com.github.pageobject.PageObject;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.PageObjectBuilderFactory;
-import com.github.pageobject.impl.readability.ReadabilityBuilder;
+import com.github.pageobject.SerialPageObjectBuilderI;
 
-public class SerialPageObjectBuilder {
+public class SerialPageObjectBuilder implements SerialPageObjectBuilderI {
 	private List<PageObject> all;
 	private PageObjectBuilderFactory factory;
 	private PageObjectBuilder current;

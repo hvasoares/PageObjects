@@ -34,7 +34,7 @@ public class StatePageObjectImpl extends StatePageObjectSymbolTable{
 	public void setState(String value) {
 		start();
 		now = allStates.get(value);
-		checkNotNull(now,"the page " + value + " isn't setted");
+		checkNotNull(now,"the page '" + value + "' isn't setted");
 	}
 
 	private void addPage(PageObject page) {

@@ -28,4 +28,11 @@ public class ReadabilityContextImpl extends ProxyStatePageObjectAdapter implemen
 		this.db.put(pageName, current);
 	}
 
+	@Override
+	public Readability get(String pageName) {
+		return this.db.get(pageName);
+	}
+	
+	
+
 }

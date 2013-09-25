@@ -1,5 +1,5 @@
 package com.github.pageobject;
 
-public interface CloneSerialPagaObjectBuilder extends SerialPageObjectBuilder{
+public interface CloneSerialPagaObjectBuilder extends SerialPageObjectBuilderI{
 
 }

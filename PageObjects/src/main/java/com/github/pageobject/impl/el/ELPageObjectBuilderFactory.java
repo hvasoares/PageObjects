@@ -2,15 +2,13 @@ package com.github.pageobject.impl.el;
 
 import org.apache.commons.jexl2.MapContext;
 
-import com.github.pageobject.AbstractFactory;
 import com.github.pageobject.DefaultFactory;
 import com.github.pageobject.PageObjectBuilder;
+import com.github.pageobject.SerialPageObjectBuilderI;
 import com.github.pageobject.StatePageObject;
 import com.github.pageobject.impl.PageObjectFactoryImpl;
 import com.github.pageobject.impl.PageObjectImpl;
 import com.github.pageobject.impl.ProxyStatePageObjectAdapter;
-import com.github.pageobject.impl.SerialPageObjectBuilder;
-import com.github.pageobject.impl.StatePageObjectSymbolTable;
 import com.github.pageobject.impl.assertivepageobject.AssertivenessImpl;
 import com.github.pageobject.impl.browser.Browser;
 import com.github.pageobject.impl.field.ClickableContainerImpl;
@@ -25,7 +23,7 @@ public class ELPageObjectBuilderFactory{
 
 	private ElContextImpl elContext;
 	private DefaultFactory factory;
-	private SerialPageObjectBuilder serialPageObjectBuilder;
+	private SerialPageObjectBuilderI serialPageObjectBuilder;
 	public ELPageObjectBuilderFactory(PageObjectRepository repo){
 		factory = new DefaultFactory(repo);
 	//	repo.setBuilderFactory(this);

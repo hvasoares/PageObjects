@@ -39,7 +39,8 @@ public class ReadabilityImpl implements Readability{
 		this.db.put(checkNotNull(propertyName),checkNotNull(xpathValue));
 	}
 	
-	Map<String,String> getDb(){
+	@Override
+	public Map<String,String> getDb(){
 		return db;
 	}
 }
