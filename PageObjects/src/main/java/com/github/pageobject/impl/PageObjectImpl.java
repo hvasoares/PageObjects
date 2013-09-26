@@ -58,4 +58,10 @@ public class PageObjectImpl extends PageObjectSymbolTable{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public PageObject doubleClick(String alias) {
+		clickCont.doubleClick(alias);
+		return this;
+	}
 }

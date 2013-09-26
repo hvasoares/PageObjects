@@ -18,6 +18,10 @@ public class ElClickable implements TestableElClickable {
 
 	@Override
 	public void click() {
+		generateClickable().click();
+	}
+
+	private Clickable generateClickable() {
 		Clickable clickable;
 		if(getToPageAlias()!=null)
 			clickable = fieldFactory.createClickable(
@@ -30,7 +34,7 @@ public class ElClickable implements TestableElClickable {
 				getAlias(),
 				elContext.evaluate(getXpath())
 			);
-		clickable.click();
+		return clickable;
 	}
 
 	public ElContext getElContext() {
@@ -52,6 +56,11 @@ public class ElClickable implements TestableElClickable {
 
 	public String getAlias() {
 		return clickableParams.getAlias();
+	}
+
+	@Override
+	public void doubleClick() {
+		generateClickable().doubleClick();
 	}
 
 }

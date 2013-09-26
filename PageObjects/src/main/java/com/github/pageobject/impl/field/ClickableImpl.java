@@ -24,9 +24,20 @@ public class ClickableImpl implements Clickable{
 	@Override
 	public void click() {
 		browser.click(params.getXpath());
+		tryChangeMachineState();
+	}
+
+	private void tryChangeMachineState() {
 		if(params.isStateChange()){
 			machine.setState(params.getToPageAlias());
 		}
+	}
+	
+	@Override
+	public void doubleClick(){
+		browser.click(params.getXpath());
+		browser.click(params.getXpath());
+		tryChangeMachineState();
 	}
 
 }

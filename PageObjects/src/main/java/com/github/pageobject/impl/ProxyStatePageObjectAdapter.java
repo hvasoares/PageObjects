@@ -65,4 +65,9 @@ public class ProxyStatePageObjectAdapter extends StatePageObjectSymbolTable impl
 			return this;
 		return outer.getOuter();
 	}
+
+	@Override
+	public StatePageObject doubleClick(String alias) {
+		return getInner().doubleClick(alias);
+	}
 }

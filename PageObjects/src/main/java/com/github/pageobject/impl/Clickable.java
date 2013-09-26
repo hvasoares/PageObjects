@@ -6,4 +6,6 @@ public interface Clickable {
 
 	public abstract void click();
 
+	public abstract void doubleClick();
+
 }

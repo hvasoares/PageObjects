@@ -48,4 +48,5 @@ public class BrowserImpl implements Browser{
 		driver.quit();
 		closed=true;
 	}
+
 }

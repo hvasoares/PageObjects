@@ -6,4 +6,6 @@ public interface ClickableContainer {
 
 	void add(Clickable click);
 
+	void doubleClick(String buttonAlias);
+
 }

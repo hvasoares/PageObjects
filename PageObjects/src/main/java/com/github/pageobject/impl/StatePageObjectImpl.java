@@ -68,4 +68,9 @@ public class StatePageObjectImpl extends StatePageObjectSymbolTable{
 	public String getName() {
 		return "StateMachine";
 	}
+	@Override
+	public StatePageObject doubleClick(String alias) {
+		now.doubleClick(alias);
+		return this;
+	}
 }

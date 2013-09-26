@@ -24,6 +24,18 @@ public class ClickableContainerImpl implements ClickableContainer {
 			throw new RuntimeException("Couldn't click " + buttonAlias,ex);
 		}
 	}
+	
+	@Override
+	public void doubleClick(String buttonAlias){
+		Clickable click = dataBase.get(buttonAlias);
+		if(click==null)
+			throw new RuntimeException("there's no clickable aliased " + buttonAlias);
+		try{
+			click.doubleClick();
+		}catch(Throwable ex){
+			throw new RuntimeException("Couldn't double click " + buttonAlias,ex);
+		}
+	}
 
 	@Override
 	public void add(Clickable click) {

@@ -11,6 +11,8 @@ public interface StatePageObject {
 	StatePageObject checkAssertion(String namedAssertion);
 
 	StatePageObject click(String alias);
+	
+	StatePageObject doubleClick(String alias);
 
 	StatePageObject fill(String field, String value);
 	
