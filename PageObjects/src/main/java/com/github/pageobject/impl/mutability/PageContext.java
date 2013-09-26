@@ -18,6 +18,8 @@ public class PageContext implements PageContextI{
 	
 	@Override
 	public Mutability createMutability(String contextName,PageObjectBuilder pageBuilder) {
+		if(this.db.containsKey(contextName))
+			return db.get(contextName); 
 		MutabilityContext ctx = new MutabilityContext(fieldFactory);
 		BuildTime buildTime = new BuildTime(ctx,new FluidXpathFactory());
 		buildTime.setCurrentBuilder(pageBuilder);
