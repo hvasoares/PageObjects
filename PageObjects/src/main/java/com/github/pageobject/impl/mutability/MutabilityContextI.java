@@ -10,4 +10,6 @@ public interface MutabilityContextI {
 
 	public abstract void click(String alias, String []arguments);
 
+	void doubleClick(String alias, String[] args);
+
 }

@@ -3,6 +3,7 @@ package com.github.pageobject.impl.mutability;
 import java.util.Arrays;
 
 import com.github.pageobject.StatePageObject;
+
 import static com.google.common.base.Preconditions.checkArgument;
 public class ExecutionTime implements ExecutionTimeI{
 
@@ -27,6 +28,11 @@ public class ExecutionTime implements ExecutionTimeI{
 	@Override
 	public void setStateObject(StatePageObject value) {
 		this.stateObject = value;
+	}
+
+	@Override
+	public void doubleClick(String ... args) {
+		context.doubleClick(args[0], Arrays.copyOfRange(args, 1, args.length));
 	}
 
 }

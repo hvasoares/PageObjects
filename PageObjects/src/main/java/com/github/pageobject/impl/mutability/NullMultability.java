@@ -44,4 +44,14 @@ public class NullMultability implements Mutability{
 		throw new RuntimeException("There's no mutability named '"+pagename+"'");
 	}
 
+	@Override
+	public StatePageObject doubleClick(String... args) {
+		throw new RuntimeException("There's no mutability named '"+pagename+"'");
+	}
+
+	@Override
+	public String read(String... args) {
+		throw new RuntimeException("There's no mutability named '"+pagename+"'");
+	}
+
 }

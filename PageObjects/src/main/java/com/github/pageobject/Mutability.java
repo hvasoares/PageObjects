@@ -10,6 +10,8 @@ public interface Mutability {
 	StatePageObject click(String ... args);
 	PageObjectBuilder addReadProperty(String alias, String xpath);
 	List<String> readAsList(String... args);
+	StatePageObject doubleClick(String ...args);
+	String read(String ...args);
 	
 
 }

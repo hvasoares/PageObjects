@@ -36,6 +36,10 @@ public class MutabilityContext implements MutabilityContextI{
 
 	@Override
 	public void click(String alias, String []arguments) {
+		createClick(alias, arguments).click();
+	}
+
+	private Clickable createClick(String alias, String[] arguments) {
 		FluidXpathI xpath = get(alias);
 		for(Entry<String, String> e : Utils.toMapSetEntry(arguments)){
 			xpath.bind(e.getKey(), e.getValue());
@@ -45,7 +49,12 @@ public class MutabilityContext implements MutabilityContextI{
 			click =fieldFactory.createClickable(alias, xpath.getTransformedXpath(),transition.get(alias));
 		else
 			click =fieldFactory.createClickable(alias, xpath.getTransformedXpath());
-		click.click();
+		return click;
+	}
+
+	@Override
+	public void doubleClick(String alias,String[] args) {
+		createClick(alias,args).doubleClick();
 	}
 
 }

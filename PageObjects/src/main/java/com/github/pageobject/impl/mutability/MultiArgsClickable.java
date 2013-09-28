@@ -7,4 +7,6 @@ public interface MultiArgsClickable {
 	public abstract StatePageObject click(String ...args);
 
 	public abstract PageObjectBuilder extendsClickable(String ...args);
+	
+	public abstract StatePageObject doubleClick(String... args);
 }

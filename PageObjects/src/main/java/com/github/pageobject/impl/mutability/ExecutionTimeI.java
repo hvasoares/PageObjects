@@ -10,4 +10,6 @@ public interface ExecutionTimeI {
 
 	void setStateObject(StatePageObject value);
 
+	void doubleClick(String... args);
+
 }

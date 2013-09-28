@@ -16,7 +16,7 @@ public abstract class LoggingFactory {
 	}
 	
 	public static Browser createBrowserLogging(Browser inner){
-		return new BrowserLog(inner, log);
+		return new BrowserLog(inner, getLog());
 	}
 
 	private static Logger getLog() {
@@ -24,7 +24,6 @@ public abstract class LoggingFactory {
 			return log;
 		log = Logger.getLogger(PageObject.class);
 		BasicConfigurator.configure();
-		log.setLevel(Level.ALL);
 		return log;
 	}
 }

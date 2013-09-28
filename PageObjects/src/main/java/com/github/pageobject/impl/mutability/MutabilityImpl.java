@@ -41,4 +41,8 @@ public class MutabilityImpl implements Mutability{
 	public List<String> readAsList(String... args) {
 		return readability.readAsList(args);
 	}
+	@Override
+	public StatePageObject doubleClick(String... args) {
+		return clickable.doubleClick(args);
+	}
 }

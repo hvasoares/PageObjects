@@ -48,4 +48,10 @@ public class Clickable implements ClickableI{
 		return build.getPageObjectBuilder();
 	}
 
+	@Override
+	public StatePageObject doubleClick(String... args) {
+		runtime.doubleClick(args);
+		return runtime.getStatePageObject();
+	}
+
 }

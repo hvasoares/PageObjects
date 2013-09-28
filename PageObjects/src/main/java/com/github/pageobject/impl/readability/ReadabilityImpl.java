@@ -24,13 +24,13 @@ public class ReadabilityImpl implements Readability{
 	public String read(String propertyName) {
 		checkNotNull(this.db.get(propertyName),"Property '"+propertyName+"' not found.");
 		try{
-			return	checkNotNull(
-				driver.findElement(By.xpath(db.get(propertyName))).getAttribute("value")
-			);
-		}catch(NullPointerException ex){
 			return checkNotNull(
 					driver.findElement(By.xpath(db.get(propertyName))).getText()
 				);	
+		}catch(NullPointerException ex){
+			return	checkNotNull(
+					driver.findElement(By.xpath(db.get(propertyName))).getAttribute("value")
+				);
 		}
 	}
 
