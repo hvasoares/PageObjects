@@ -1,5 +1,9 @@
 package com.github.pageobject.impl.field;
 
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import org.openqa.selenium.Keys;
 
 import com.github.pageobject.StatePageObject;
@@ -17,13 +21,22 @@ public class EraseBeforeFillTextField implements Field{
 
 	@Override
 	public void fill(String value) {
-		while(!"".equals(machine
-				.readability()
-				.read(getAlias())
-		)){
-			inner.fill(Keys.chord(Keys.BACK_SPACE));
-		}
+		String currentString = machine.readability().read(getAlias());
+		CharSequence [] backSpaces  = new CharSequence[currentString.length()]; 
+		
+		for(int i=0;i< backSpaces.length;i++)
+			backSpaces[i]=Keys.BACK_SPACE;
+		
+		inner.fill(Keys.chord(backSpaces));
 		inner.fill(value);
+	}
+
+	private <T> Set<Entry<Integer,T>> each(T[] split) {
+		HashMap<Integer,T> result = new HashMap<>();
+		for(int i=0; i< split.length; i++){
+			result.put(i, split[i]);
+		}
+		return result.entrySet();
 	}
 
 	@Override

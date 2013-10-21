@@ -13,4 +13,6 @@ public interface ClickableI extends MultiArgsClickable {
 	
 	public PageObjectBuilder getPageObjectBuilder();
 
+	public abstract StatePageObject getStatePageObject();
+
 }

@@ -3,6 +3,7 @@ package com.github.pageobject.impl.mutability;
 import java.util.List;
 
 import com.github.pageobject.Mutability;
+import com.github.pageobject.MutabilityCustomFieldFactory;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.StatePageObject;
 
@@ -51,6 +52,23 @@ public class NullMultability implements Mutability{
 
 	@Override
 	public String read(String... args) {
+		throw new RuntimeException("There's no mutability named '"+pagename+"'");
+	}
+
+	@Override
+	public PageObjectBuilder addCustomField(String alias, String xpath,
+			MutabilityCustomFieldFactory mutabilityCustomFieldFactory) {
+		throw new RuntimeException("There's no mutability named '"+pagename+"'");
+	}
+
+	@Override
+	public StatePageObject fill(String alias, String value, String... args) {
+		throw new RuntimeException("There's no mutability named '"+pagename+"'");
+	}
+
+	@Override
+	public PageObjectBuilder addCustomField(String alias, List<String> xpath,
+			MutabilityCustomFieldFactory mutabilityCustomFieldFactory) {
 		throw new RuntimeException("There's no mutability named '"+pagename+"'");
 	}
 

@@ -4,14 +4,13 @@ import org.apache.commons.jexl2.MapContext;
 
 import com.github.pageobject.impl.FieldFactory;
 import com.github.pageobject.impl.ProxyStatePageObjectAdapter;
-import com.github.pageobject.impl.field.FieldFactoryImpl;
 
 public class ElFactory {
 
 	private static ElContextImpl elContext;
 
 	public static FieldFactory createFieldFactory(
-			FieldFactoryImpl innerFieldFactory) {
+			FieldFactory innerFieldFactory) {
 		return new ElFieldFactory(createElContext(), innerFieldFactory);
 	}
 

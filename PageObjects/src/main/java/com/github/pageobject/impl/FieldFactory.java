@@ -2,11 +2,11 @@ package com.github.pageobject.impl;
 
 import com.github.pageobject.impl.field.CustomField;
 
-public interface FieldFactory {
+public interface FieldFactory extends CustomFieldConfigurator{
 
-	Field createTextField(String string, String string2);
+	Field createTextField(String alias, String xpath);
 
-	Clickable createClickable(String string, String xpath, String toPageAlias);
+	Clickable createClickable(String alias, String xpath, String toPageAlias);
 
 	Clickable createClickable(String alias, String xpath);
 

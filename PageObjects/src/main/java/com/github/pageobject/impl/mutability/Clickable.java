@@ -54,4 +54,9 @@ public class Clickable implements ClickableI{
 		return runtime.getStatePageObject();
 	}
 
+	public StatePageObject getStatePageObject() {
+		return runtime.getStatePageObject();
+	}
+	
+
 }

@@ -1,7 +1,9 @@
 package com.github.pageobject.impl.field.file;
 
-import com.github.pageobject.impl.Field;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.github.pageobject.impl.browser.Browser;
+import com.github.pageobject.impl.field.CustomField;
 
 public class FileFieldFactoryImpl implements FileFieldFactory {
 
@@ -9,13 +11,22 @@ public class FileFieldFactoryImpl implements FileFieldFactory {
 	private PathGenerator pathGenerator;
 
 	public FileFieldFactoryImpl(Browser browser) {
+		this();
 		this.browser = browser;
+	}
+
+	public FileFieldFactoryImpl() {
 		pathGenerator = new PathGeneratorImpl();
 	}
 
 	@Override
-	public Field create(String alias, String xpath) {
+	public CustomField create(String alias, String xpath) {
 		return new FileInputField(alias,xpath,browser,pathGenerator);
+	}
+
+	@Override
+	public void setBrowser(Browser browser) {
+		this.browser = browser;
 	}
 
 }

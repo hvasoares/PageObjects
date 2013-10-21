@@ -1,6 +1,10 @@
 package com.github.pageobject.impl.field;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jmock.Expectations;
+import org.jmock.Sequence;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.jmock.lib.legacy.ClassImposteriser;
@@ -26,21 +30,25 @@ public class EraseBeforeFillTextFieldTest {
 		ctx.checking(new Expectations(){{
 			atLeast(1).of(textField).getAlias();will(returnValue("fieldName"));
 			
-			exactly(4).of(machine).readability();will(returnValue(readability));
-			exactly(4).of(readability).read("fieldName");
-			will(onConsecutiveCalls(
-					returnValue("aaa"),
-					returnValue("aa"),
-					returnValue("a"),
-					returnValue("")
-			));
+			exactly(1).of(machine).readability();will(returnValue(readability));
+			oneOf(readability).read("fieldName");
+			will(returnValue("0123456"));
 			
-			exactly(3).of(textField).fill(Keys.chord(Keys.BACK_SPACE));
+			Sequence sequence = ctx.sequence("fill sequence");
+			oneOf(textField).fill(Keys.chord(repeat(7,Keys.BACK_SPACE)));
+			inSequence(sequence );
 			
 			oneOf(textField).fill("value");
+			inSequence(sequence );
 		}});
 		
 		instance.fill("value");
 	}
 
+	private Keys[] repeat(int times, Keys backSpace) {
+		Keys[] result = new Keys[times];
+		for(int i=0; i<times;i++)
+			result[i]=backSpace;
+		return result;
+	}
 }

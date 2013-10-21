@@ -1,9 +1,9 @@
 package com.github.pageobject.impl.field.file;
 
-import com.github.pageobject.impl.Field;
 import com.github.pageobject.impl.browser.Browser;
+import com.github.pageobject.impl.field.CustomField;
 
-public class FileInputField implements Field{
+public class FileInputField implements CustomField{
 
 	private PathGenerator resourceLoader;
 	private Browser browser;
@@ -11,9 +11,13 @@ public class FileInputField implements Field{
 	private String alias;
 
 	public FileInputField(String alias, String xpath,Browser browser, PathGenerator resourceLoader) {
+		this(alias,xpath,resourceLoader);
+		this.browser = browser;
+	}
+	
+	public FileInputField(String alias, String xpath,PathGenerator resourceLoader){
 		this.alias=alias;
 		this.xpath = xpath;
-		this.browser = browser;
 		this.resourceLoader = resourceLoader;
 	}
 
@@ -25,6 +29,11 @@ public class FileInputField implements Field{
 	@Override
 	public String getAlias() {
 		return alias;
+	}
+
+	@Override
+	public void setBrowser(Browser value) {
+		this.browser = value;
 	}
 
 }

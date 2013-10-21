@@ -1,9 +1,10 @@
 package com.github.pageobject.impl.field.file;
 
-import com.github.pageobject.impl.Field;
+import com.github.pageobject.MutabilityCustomFieldFactory;
+import com.github.pageobject.impl.browser.Browser;
 
-public interface FileFieldFactory {
+public interface FileFieldFactory extends MutabilityCustomFieldFactory{
 
-	Field create(String alias, String xpath);
+	void setBrowser(Browser browser);
 
 }

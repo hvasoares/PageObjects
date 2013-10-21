@@ -33,7 +33,8 @@ public class PageContext implements PageContextI{
 					new MutableReadability(
 						ReadabilityImplementationFactory.createDetachedReadabilityFactory(), 
 						new FluidXpathFactory()
-					)
+					),
+					new FieldContainer(fieldFactory)
 			)
 		);
 		return db.get(contextName);
