@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
 import com.github.pageobject.impl.Readability;
@@ -20,17 +21,31 @@ public class ReadabilityImpl implements Readability{
 		this.driver = webDriver;
 	}
 
-	@Override
-	public String read(String propertyName) {
+	private String readInner(String propertyName) {
 		checkNotNull(this.db.get(propertyName),"Property '"+propertyName+"' not found.");
+		String text=null;
+		String value=null;
 		try{
-			return checkNotNull(
+			checkNotNull(text=
 					driver.findElement(By.xpath(db.get(propertyName))).getText()
 				);	
 		}catch(NullPointerException ex){
-			return	checkNotNull(
+			checkNotNull(value=
 					driver.findElement(By.xpath(db.get(propertyName))).getAttribute("value")
-				);
+			);
+		}
+		
+		if(value !=null)
+			return value;
+		return text;		
+	}
+
+	@Override
+	public String read(String property){
+		try{
+			return readInner(property);
+		}catch(StaleElementReferenceException ex){
+			return readInner(property);
 		}
 	}
 
