@@ -25,8 +25,8 @@ public class BrowserImpl implements Browser{
 	@Override
 	public void fill(String xpath, String value) {
 		assertValidState();
-		WebElement textF = driver.findElement(By.xpath(xpath));
-		textF.sendKeys(value);
+		driver.findElement(By.xpath(xpath))
+			.sendKeys(value);
 	}
 
 	@Override

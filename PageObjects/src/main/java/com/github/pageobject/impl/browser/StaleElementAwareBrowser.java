@@ -37,5 +37,7 @@ public class StaleElementAwareBrowser implements Browser{
 	public void close() {
 		inner.close();
 	}
+	
+	
 
 }
