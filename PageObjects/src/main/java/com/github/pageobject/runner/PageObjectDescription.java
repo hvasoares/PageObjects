@@ -1,7 +1,7 @@
 package com.github.pageobject.runner;
 
 import org.junit.runner.Description;
-import org.junit.runner.Runner;
+import org.junit.runner.RunWith;
 
 import com.github.jsteak.DescriptionGetter;
 
@@ -24,10 +24,18 @@ public class PageObjectDescription implements DescriptionGetter{
 	public PageObjectRepository getRepository() {
 		if(repository!=null)
 			return repository;
+		
+		boolean clazzIsSuite = clazz.isAnnotationPresent(RunWith.class) &&
+				clazz.getAnnotation(RunWith.class).value() == PageObjectSuite.class;
+		
+		if(clazzIsSuite)
+			return null;
+		
 		if(!clazz.isAnnotationPresent(PageObjectTest.class))
 			throw new RuntimeException(
 					"The test class should be annotated with PageObjectTest"
 			);
+		
 		PageObjectTest por = clazz.getAnnotation(PageObjectTest.class);
 		repository = constructor.construct(por.repository());
 		return repository;

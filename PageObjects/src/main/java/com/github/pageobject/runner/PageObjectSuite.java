@@ -50,7 +50,7 @@ public class PageObjectSuite extends Runner implements BrowserLocker{
 
 	private Runner createRunner(Class<?> c) {
 		RunWith runWith = c.getAnnotation(RunWith.class);
-		if(runWith.value().equals(this.clazz)){
+		if(runWith.value().equals(PageObjectSuite.class)){
 			return new PageObjectSuite(c,defaultFactory);
 		}
 		return new PageObjectRunner(c, defaultFactory);
