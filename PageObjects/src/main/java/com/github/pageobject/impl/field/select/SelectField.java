@@ -1,5 +1,8 @@
 package com.github.pageobject.impl.field.select;
 
+import com.github.pageobject.MutabilityCustomFieldFactory;
+import com.github.pageobject.impl.browser.Browser;
+import com.github.pageobject.impl.field.CustomField;
 import com.github.pageobject.impl.field.Select;
 
 public abstract class SelectField implements Select{
@@ -11,5 +14,18 @@ public abstract class SelectField implements Select{
 	}
 	public static Select createFluidSelect(String alias,String rootXpath){
 		return new FluidChoice(alias,rootXpath);
+	}
+	public static MutabilityCustomFieldFactory createMutableFactory() {
+		return new MutabilityCustomFieldFactory() {
+			@Override
+			public void setBrowser(Browser value) {
+				
+			}
+			
+			@Override
+			public CustomField create(String alias, String xpath) {
+				return createFluidSelect(alias, xpath);
+			}
+		};
 	}
 }

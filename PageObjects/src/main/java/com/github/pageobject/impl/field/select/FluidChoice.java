@@ -21,7 +21,7 @@ public class FluidChoice implements Select {
 
 	@Override
 	public void fill(String string) {
-		browser.click(this.rootXpath+"//option[contains(.,'"+string+"')]");
+		browser.click(this.rootXpath+"//option[.='"+string+"']");
 	}
 
 	@Override
