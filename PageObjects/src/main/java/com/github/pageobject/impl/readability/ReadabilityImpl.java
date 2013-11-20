@@ -26,11 +26,12 @@ public class ReadabilityImpl implements Readability{
 		String text=null;
 		String value=null;
 		try{
-			checkNotNull(text=
+			text =checkNotNull(
 					driver.findElement(By.xpath(db.get(propertyName))).getText()
 				);	
-		}catch(NullPointerException ex){
-			checkNotNull(value=
+			checkState(text.length()>0);
+		}catch(NullPointerException| IllegalStateException ex){
+			value= checkNotNull(
 					driver.findElement(By.xpath(db.get(propertyName))).getAttribute("value")
 			);
 		}
