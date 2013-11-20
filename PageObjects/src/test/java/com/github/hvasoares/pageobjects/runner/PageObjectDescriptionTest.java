@@ -11,11 +11,11 @@ import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 
+import com.github.hvasoares.jsteak.DescriptionGetter;
 import com.github.hvasoares.pageobjects.runner.ObjectConstructor;
 import com.github.hvasoares.pageobjects.runner.PageObjectDescription;
 import com.github.hvasoares.pageobjects.runner.resources.SampleRepository;
 import com.github.hvasoares.pageobjects.runner.resources.SampleTest;
-import com.github.jsteak.DescriptionGetter;
 
 public class PageObjectDescriptionTest {
 

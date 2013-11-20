@@ -1,6 +1,6 @@
 package com.github.hvasoares.pageobjects.runner;
 
-import com.github.jsteak.DescriptionGetter;
+import com.github.hvasoares.jsteak.DescriptionGetter;
 
 public interface PageObjectDescriptionGetter extends DescriptionGetter{
 

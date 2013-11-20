@@ -4,11 +4,11 @@ import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 
+import com.github.hvasoares.jsteak.JSteakRunnerBuilder;
 import com.github.hvasoares.pageobjects.DefaultFactory;
 import com.github.hvasoares.pageobjects.RepositoryAwareFactory;
 import com.github.hvasoares.pageobjects.impl.browser.BrowserLocker;
 import com.github.hvasoares.pageobjects.impl.browser.TestSuiteAwareBrowser;
-import com.github.jsteak.JSteakRunnerBuilder;
 
 public class PageObjectRunner extends Runner implements BrowserLocker{
 	private JSteakRunnerBuilder steakRunner;

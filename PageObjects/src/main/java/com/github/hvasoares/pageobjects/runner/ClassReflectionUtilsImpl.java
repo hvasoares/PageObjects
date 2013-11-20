@@ -3,8 +3,8 @@ package com.github.hvasoares.pageobjects.runner;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import com.github.hvasoares.jsteak.ClassReflectionUtils;
 import com.github.hvasoares.pageobjects.PageObjectBuilderFactory;
-import com.github.jsteak.ClassReflectionUtils;
 
 public class ClassReflectionUtilsImpl implements ClassReflectionUtils{
 	private ObjectConstructor constructor;

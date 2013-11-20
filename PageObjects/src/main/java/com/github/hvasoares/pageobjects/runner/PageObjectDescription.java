@@ -3,7 +3,7 @@ package com.github.hvasoares.pageobjects.runner;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 
-import com.github.jsteak.DescriptionGetter;
+import com.github.hvasoares.jsteak.DescriptionGetter;
 
 public class PageObjectDescription implements DescriptionGetter{
 	private DescriptionGetter descGetter;
