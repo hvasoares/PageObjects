@@ -33,7 +33,6 @@ public abstract class ReadabilityImplementationFactory {
 
 	public static ReadabilityFactory createDetachedReadabilityFactory() {
 		return new ReadabilityFactory() {
-			
 			@Override
 			public Readability create() {
 				return new ReadabilityImpl(wDriver);
