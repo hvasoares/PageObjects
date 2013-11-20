@@ -3,6 +3,7 @@ package com.github.pageobject.impl.mutability;
 import java.util.HashMap;
 
 import com.github.pageobject.Mutability;
+import com.github.pageobject.MutableAssertiveness;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.StatePageObject;
 import com.github.pageobject.impl.FieldFactory;
@@ -34,7 +35,8 @@ public class PageContext implements PageContextI{
 						ReadabilityImplementationFactory.createDetachedReadabilityFactory(), 
 						new FluidXpathFactory()
 					),
-					new FieldContainer(fieldFactory)
+					new FieldContainer(fieldFactory),
+					new MutableAssertivenessImpl()
 			)
 		);
 		return db.get(contextName);
