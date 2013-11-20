@@ -15,4 +15,5 @@ public interface Mutability {
 	PageObjectBuilder addCustomField(String alias, String xpath, MutabilityCustomFieldFactory mutabilityCustomFieldFactory);
 	PageObjectBuilder addCustomField(String alias, List<String> xpath, MutabilityCustomFieldFactory mutabilityCustomFieldFactory);
 	StatePageObject fill(String alias, String value, String ... args);
+	MutableAssertiveness assertiveness();
 }
