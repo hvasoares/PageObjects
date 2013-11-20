@@ -12,6 +12,7 @@ import com.github.pageobject.impl.ProxyPageObjectBuilderAdapter;
 import com.github.pageobject.impl.ProxyStatePageObjectAdapter;
 import com.github.pageobject.impl.SerialPageObjectBuilder;
 import com.github.pageobject.impl.StatePageObjectImpl;
+import com.github.pageobject.impl.assertivepageobject.AssertivenessFactory;
 import com.github.pageobject.impl.assertivepageobject.AssertivenessImpl;
 import com.github.pageobject.impl.browser.Browser;
 import com.github.pageobject.impl.browser.BrowserFactory;
@@ -37,13 +38,11 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 	private WebDriver driver;
 	private SerialPageObjectBuilderI serialBuilder;
 	private FieldFactory fieldFactory;
-
+	
+	public DefaultFactory(){}
+	
 	public DefaultFactory(PageObjectRepository repository) {
 		setRepository(repository);
-	}
-	
-	public DefaultFactory(){
-		
 	}
 
 	@Override
@@ -60,7 +59,7 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 				new PageObjectImpl(
 						new ClickableContainerImpl(),
 						new FieldContainerImpl(),
-						new AssertivenessImpl(getWebDriver())
+						AssertivenessFactory.create(getWebDriver())
 				)
 		);
 	}

@@ -7,7 +7,13 @@ public class ObjectConstructor {
 
 	public <T> T construct(Class<? extends T> clazz) {
 		try {
+			
 			Constructor<?> defaultConstructor = clazz.getConstructors()[0];
+			for(Constructor<?> c : clazz.getConstructors())
+				if(c.getParameterTypes().length==0){
+					defaultConstructor = c;
+					break;
+				}
 			return (T) defaultConstructor.newInstance();
 		} catch (IllegalArgumentException e1) {
 			throw new RuntimeException("The feature class must have one and only one default constructor",e1);
