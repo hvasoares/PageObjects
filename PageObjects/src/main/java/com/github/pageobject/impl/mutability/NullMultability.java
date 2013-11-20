@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.pageobject.Mutability;
 import com.github.pageobject.MutabilityCustomFieldFactory;
+import com.github.pageobject.MutableAssertiveness;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.StatePageObject;
 
@@ -38,6 +39,11 @@ public class NullMultability implements Mutability{
 
 	@Override
 	public PageObjectBuilder addReadProperty(String alias, String xpath) {
+		throw new RuntimeException("There's no mutability named '"+pagename+"'");
+	}
+	
+	@Override
+	public MutableAssertiveness assertiveness(){
 		throw new RuntimeException("There's no mutability named '"+pagename+"'");
 	}
 

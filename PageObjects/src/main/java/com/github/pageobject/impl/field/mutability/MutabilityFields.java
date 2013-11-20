@@ -4,6 +4,7 @@ import com.github.pageobject.MutabilityCustomFieldFactory;
 import com.github.pageobject.impl.browser.Browser;
 import com.github.pageobject.impl.field.CustomField;
 import com.github.pageobject.impl.field.TextField;
+import com.github.pageobject.impl.field.select.SelectField;
 
 public class MutabilityFields {
 
@@ -39,5 +40,9 @@ public class MutabilityFields {
 				};
 			}
 		};
+	}
+
+	public static MutabilityCustomFieldFactory getSelectFieldFactory() {
+		return SelectField.createMutableFactory();
 	}
 }

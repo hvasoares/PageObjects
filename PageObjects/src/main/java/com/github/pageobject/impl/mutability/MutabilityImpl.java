@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.github.pageobject.Mutability;
 import com.github.pageobject.MutabilityCustomFieldFactory;
+import com.github.pageobject.MutableAssertiveness;
 import com.github.pageobject.PageObjectBuilder;
 import com.github.pageobject.StatePageObject;
 
@@ -12,11 +13,21 @@ public class MutabilityImpl implements Mutability{
 	private ClickableI clickable;
 	private MutableReadabilityI readability;
 	private FieldContainerI fields;
-	public MutabilityImpl(ClickableI clickable, MutableReadabilityI readability, FieldContainer fieldContainer) {
+	private MutableAssertivenessImpl assertiveness;
+	public MutabilityImpl(
+		ClickableI clickable, 
+		MutableReadabilityI readability, 
+		FieldContainer fieldContainer,
+		MutableAssertivenessImpl assertiveness
+	) {
 		super();
 		this.clickable = clickable;
 		this.readability = readability;
 		this.fields=fieldContainer;
+		this.assertiveness = assertiveness;
+		
+		this.assertiveness.setStatePageObject(clickable.getStatePageObject());
+		this.assertiveness.setPageObjectBuilder(clickable.getPageObjectBuilder());
 	}
 	public StatePageObject click(String... args) {
 		return clickable.click(args);
@@ -64,6 +75,10 @@ public class MutabilityImpl implements Mutability{
 			MutabilityCustomFieldFactory mutabilityCustomFieldFactory) {
 		fields.add(alias, xpath, mutabilityCustomFieldFactory);
 		return clickable.getPageObjectBuilder();
+	}
+	@Override
+	public MutableAssertiveness assertiveness() {
+		return assertiveness;
 	}
 	
 }
