@@ -3,17 +3,17 @@ package com.github.hvasoares.pageobjects.aspects.macro;
 public aspect ExecuteAfterDoAction {
 	private boolean realizouAcao = false;
 	
-	pointcut checarRealizarAcaoFoiChamado(): execution(* *(..)) && !execution(* realizarAcao()) && target(Macro);
+	pointcut checkIfActionIsExecuted(): execution(* *(..)) && !execution(* doAction()) && target(Macro);
 	
-	pointcut realizouAcaoFlag(): execution(public void Macro.realizarAcao()) && target(Macro);
+	pointcut doActionFlag(): target(Macro) && execution(* doAction());
 	
-	after(): realizouAcaoFlag(){
+	after(): doActionFlag(){
 		realizouAcao=true;
 	}
 		
 	
-	before(): checarRealizarAcaoFoiChamado() && @annotation(OnlyExecuteAfterDoAction){
+	before(): checkIfActionIsExecuted() && @annotation(OnlyExecuteAfterDoAction){
 		if(!realizouAcao)
-			throw new RuntimeException("Esse método não pode ser chamado antes de realizarAcao()");
+			throw new RuntimeException("This method should be called after doAction method");
 	}
 }

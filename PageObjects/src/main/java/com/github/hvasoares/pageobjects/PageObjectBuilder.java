@@ -5,9 +5,9 @@ import com.github.hvasoares.pageobjects.impl.field.CustomField;
 
 public interface PageObjectBuilder {
 
-	PageObjectBuilder addClickable(String string, String string2);
+	PageObjectBuilder addClickable(String alias, String xpath);
 
-	PageObjectBuilder addTextField(String string, String string2);
+	PageObjectBuilder addTextField(String alias, String xpath);
 
 	PageObject get();
 
@@ -15,7 +15,7 @@ public interface PageObjectBuilder {
 
 	PageObjectBuilder setName(String value);
 
-	PageObjectBuilder addFileField(String string, String string2);
+	PageObjectBuilder addFileField(String alias, String xpath);
 
 	PageObjectBuilder addCustomField(CustomField custom);
 
