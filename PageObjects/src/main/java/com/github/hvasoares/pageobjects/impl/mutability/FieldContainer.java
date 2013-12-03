@@ -52,6 +52,10 @@ public class FieldContainer implements FieldContainerI{
 	
 	private String getTransformedXpath(String xpath,String[] args){
 		FluidXpath result = new FluidXpath(xpath);
+		String[] newArgs = args;
+		if(args.length==1)
+			newArgs = new String[]{"value",args[0]};
+		
 		for(Entry<String, String> e : Utils.toMapSetEntry(args)){
 			result.bind(e.getKey(), e.getValue());
 		}

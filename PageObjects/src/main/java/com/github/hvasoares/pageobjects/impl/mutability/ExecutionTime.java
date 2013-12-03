@@ -21,7 +21,7 @@ public class ExecutionTime implements ExecutionTimeI{
 
 	@Override
 	public void click(String... args) {
-		checkArgument(args.length >=3, "The arguments array should be: alias (placeHolder value)+");
+		checkArgument(args.length >=2, "The arguments array should be: alias (placeHolder value | singleValue )+");
 		context.click(args[0], Arrays.copyOfRange(args, 1, args.length));
 	}
 

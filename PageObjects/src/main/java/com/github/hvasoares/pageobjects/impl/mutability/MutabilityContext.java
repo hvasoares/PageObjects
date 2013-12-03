@@ -40,8 +40,12 @@ public class MutabilityContext implements MutabilityContextI{
 	}
 
 	private Clickable createClick(String alias, String[] arguments) {
+		String[] newArgs = arguments;
+		if(arguments.length==1)
+			newArgs = new String[]{"value",arguments[0]};
+		
 		FluidXpathI xpath = get(alias);
-		for(Entry<String, String> e : Utils.toMapSetEntry(arguments)){
+		for(Entry<String, String> e : Utils.toMapSetEntry(newArgs)){
 			xpath.bind(e.getKey(), e.getValue());
 		}
 		Clickable click;
