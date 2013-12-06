@@ -29,6 +29,7 @@ import com.github.hvasoares.pageobjects.impl.readability.ReadabilityImplementati
 import com.github.hvasoares.pageobjects.impl.webdriver.FirefoxWebDriverFactory;
 import com.github.hvasoares.pageobjects.impl.webdriver.WebDriverFactory;
 import com.github.hvasoares.pageobjects.proxy.MatryoshkaDollFactory;
+import com.github.hvasoares.pageobjects.report.ReportFactory;
 import com.github.hvasoares.pageobjects.runner.PageObjectRepository;
 
 public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactoryGetter{
@@ -75,6 +76,7 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 		MatryoshkaDollFactory<StatePageObject, ProxyStatePageObjectAdapter> m = new MatryoshkaDollFactory<StatePageObject,ProxyStatePageObjectAdapter>();
 		state= m.create(
 				new StatePageObjectImpl(repository),
+				ReportFactory.createReportedStatePageObject(),
 				LoggingFactory.createStatePageObjectLogging(),
 				ReadabilityImplementationFactory.createReadabilityStatePageObject(),
 				ElFactory.createElContextStatePageObject(),
@@ -105,6 +107,7 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 			return driver;
 		WebDriverFactory factory = new FirefoxWebDriverFactory();
  		driver = factory.create();
+ 		WebDriverHolder.value(driver);
 		return driver;
 	}
 

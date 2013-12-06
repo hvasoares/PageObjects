@@ -9,6 +9,7 @@ import com.github.hvasoares.pageobjects.DefaultFactory;
 import com.github.hvasoares.pageobjects.RepositoryAwareFactory;
 import com.github.hvasoares.pageobjects.impl.browser.BrowserLocker;
 import com.github.hvasoares.pageobjects.impl.browser.TestSuiteAwareBrowser;
+import com.github.hvasoares.pageobjects.report.ReportListenerFactory;
 
 public class PageObjectRunner extends Runner implements BrowserLocker{
 	private JSteakRunnerBuilder steakRunner;
@@ -50,6 +51,7 @@ public class PageObjectRunner extends Runner implements BrowserLocker{
 	public void run(RunNotifier notifier) {
 		TestSuiteAwareBrowser instance = TestSuiteAwareBrowser.getInstance();
 		instance.setBrowserLocker(this);
+		notifier.addListener( ReportListenerFactory.createListener() );
 		try{
 			steakRunner.run(notifier);
 			instance.close(this);;

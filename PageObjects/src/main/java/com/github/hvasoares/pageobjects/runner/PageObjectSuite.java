@@ -14,6 +14,7 @@ import com.github.hvasoares.pageobjects.DefaultFactory;
 import com.github.hvasoares.pageobjects.RepositoryAwareFactory;
 import com.github.hvasoares.pageobjects.impl.browser.BrowserLocker;
 import com.github.hvasoares.pageobjects.impl.browser.TestSuiteAwareBrowser;
+import com.github.hvasoares.pageobjects.report.ReportListenerFactory;
 public class PageObjectSuite extends Runner implements BrowserLocker{
 	private Class<?> clazz;
 	private Class<?>[] classes;
@@ -59,7 +60,8 @@ public class PageObjectSuite extends Runner implements BrowserLocker{
 	@Override
 	public void run(RunNotifier notifier) {
 		TestSuiteAwareBrowser browser = TestSuiteAwareBrowser.getInstance();
-		browser.setBrowserLocker(this);
+		browser.setBrowserLocker(this);		
+		notifier.addListener( ReportListenerFactory.createListener() );		
 		notifier.fireTestStarted(description);
 		for( Runner runner : db){
 			try{
