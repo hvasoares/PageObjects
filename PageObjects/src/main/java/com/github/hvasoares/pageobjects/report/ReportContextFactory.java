@@ -3,8 +3,6 @@ package com.github.hvasoares.pageobjects.report;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-
 import com.github.hvasoares.pageobjects.utils.JVMOptions;
 
 public final class ReportContextFactory {
@@ -36,9 +34,7 @@ public final class ReportContextFactory {
 		List<String> enabledStrategies = settings.getStrategies();
 		if ( enabledStrategies.contains("screenshot") ){
 			strategies.add( new ScreenshotReportStrategy() );
-		} else {
-			throw new IllegalArgumentException("....");
-		}
+		}  
 		return strategies;
 	}
 

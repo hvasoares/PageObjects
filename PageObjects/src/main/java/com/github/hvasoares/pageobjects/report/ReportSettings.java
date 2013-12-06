@@ -1,9 +1,8 @@
 package com.github.hvasoares.pageobjects.report;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
-import com.google.common.base.Preconditions;
 
 public class ReportSettings {
 	 
@@ -13,11 +12,20 @@ public class ReportSettings {
 	  
 	public ReportSettings( String rootPath,
 			List<String> strategies) {
-		super();
-		Preconditions.checkNotNull(rootPath);
-		Preconditions.checkNotNull(strategies);
+		super(); 
 		this.rootPath = rootPath;
 		this.strategies = strategies;
+		checkInstance();
+	}
+
+	private void checkInstance() {
+		if (this.rootPath == null){
+			this.rootPath = System.getProperty("user.home");
+		} 	
+		
+		if ( this.strategies == null ){
+			this.strategies = Collections.emptyList();
+		}
 	}
 
 	public boolean isEnabled(){
@@ -30,6 +38,5 @@ public class ReportSettings {
 	 
 	public List<String> getStrategies() {
 		return strategies;
-	}
-	  
+	}	  
 }
