@@ -35,7 +35,7 @@ public class PathGeneratorTest {
 		final Description testDescription = context.mock(Description.class);
 		final ReportSettings settings = context.mock(ReportSettings.class);
 		
-		final Calendar date = new GregorianCalendar(2013, 3, 7);
+		final Calendar date = new GregorianCalendar(2013, 3, 7, 12,00);
 		context.checking( new Expectations(){{
 			oneOf( reportContext ).getSettings(); will( returnValue (settings) );
 			oneOf( settings ).getPath(); will( returnValue ( "C:\\test-date") );
@@ -54,7 +54,7 @@ public class PathGeneratorTest {
 		 
 		Assert.assertThat( path, 
 				Matchers.equalTo(  
-						"C:\\test-date" + File.separator + "07-04-2013" + File.separator + "com.github.pageobject.TestClass" + File.separator + "5-test with name x-click.jpg") );
+						"C:\\test-date" + File.separator + "07-04-2013-12-00-00" + File.separator + "com.github.pageobject.TestClass" + File.separator + "5-test with name x-click.jpg") );
 	}
 
 }

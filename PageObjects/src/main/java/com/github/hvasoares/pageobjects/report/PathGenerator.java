@@ -7,7 +7,7 @@ class PathGenerator {
 
 	public String generate( ReportContext context, String event ){
 
-		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
 		String formatedDate = formater.format( context.getExecutionDate() );
 		
 		File dir = new File( context.getSettings().getPath() 
