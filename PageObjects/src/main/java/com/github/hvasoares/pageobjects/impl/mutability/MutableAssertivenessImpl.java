@@ -29,8 +29,12 @@ public class MutableAssertivenessImpl implements MutableAssertiveness {
 	@Override
 	public StatePageObject check(String alias, String... params) {
 		Assertiveness assertiveness = AssertivenessFactory.create();
+		String[] newParams = params;
+		if(params.length==1)
+			newParams = new String[]{"value",params[0]};
+		
 		xpath = db.get(alias);
-		for(Entry<String, String> e : Utils.toMapSetEntry(params))
+		for(Entry<String, String> e : Utils.toMapSetEntry(newParams))
 			xpath.bind(e.getKey(), e.getValue());
 		assertiveness.pageAssertion(xpath.getTransformedXpath());
 		return statePageObject;

@@ -21,7 +21,6 @@ public class Mixer implements MixerI {
 			getMixin(stack.pop()).build(builder);
 		}
 		mixin.build(builder);
-		builder.setName(mixin.getName());
 		return builder;
 	}
 	

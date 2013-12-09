@@ -12,8 +12,8 @@ public class ProxyStatePageObject extends ProxyStatePageObjectAdapter {
 
 	@Override
 	public void setState(String stateName) {
-		setMutability(ctx.get(stateName,getOuter()));
 		super.setState(stateName);
+		setMutability(ctx.get(stateName,getOuter()));
 	}
 
 	
