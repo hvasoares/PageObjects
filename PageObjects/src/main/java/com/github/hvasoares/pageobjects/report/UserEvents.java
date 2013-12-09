@@ -1,6 +1,6 @@
 package com.github.hvasoares.pageobjects.report;
 
-public interface UserEvents {
+interface UserEvents {
 	
 	String CLICK = "click";
 	
