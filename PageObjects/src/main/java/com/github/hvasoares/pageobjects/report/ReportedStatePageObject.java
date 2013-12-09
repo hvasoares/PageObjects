@@ -3,15 +3,18 @@ package com.github.hvasoares.pageobjects.report;
 import com.github.hvasoares.pageobjects.StatePageObject;
 import com.github.hvasoares.pageobjects.impl.ProxyStatePageObjectAdapter;
 
-public class ReportedStatePageObject extends ProxyStatePageObjectAdapter {
+public class ReportedStatePageObject extends ProxyStatePageObjectAdapter  {
 
 	private ReportContext reportContext;
 	 
+	private PageLoadedWait pageLoadedWait;
+	
 	public ReportedStatePageObject(ReportContext reportContext) {
 		this.reportContext = reportContext;
+		this.pageLoadedWait = new PageLoadedWait();
 	}
 	 
-	@Override // /pasta/20-11-2013/suite{single-suite}/scenario/evidencias-ordem-evento.jpg 8895 5411
+	@Override 
 	public StatePageObject click(String alias) {
 		if ( !shouldTakeScreenshot() ) {
 			return getInner().click(alias);
@@ -39,6 +42,7 @@ public class ReportedStatePageObject extends ProxyStatePageObjectAdapter {
 			getInner().setState(stateName); 
 		} else { 
 			getInner().setState(stateName);
+			pageLoadedWait.waitForPageLoaded();
 			reportEvent("change-page" ); 
 		}		 
 	}
@@ -54,7 +58,6 @@ public class ReportedStatePageObject extends ProxyStatePageObjectAdapter {
 		}
 	}
 
-
 	private boolean shouldTakeScreenshot() {
 		return reportContext.getSettings().isEnabled();
 	}
@@ -64,5 +67,5 @@ public class ReportedStatePageObject extends ProxyStatePageObjectAdapter {
 			strategy.report(  reportContext, event );
 		}
 		reportContext.nextStep();
-	}
+	}	
 }

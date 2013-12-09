@@ -46,7 +46,7 @@ public class FirefoxWebDriverFactory implements WebDriverFactory{
 		}
 		result = new FirefoxDriver(profile);
 		result.manage().window().maximize();
-		result.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		result.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS); 
 		return result;
 	}
 
