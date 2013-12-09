@@ -7,10 +7,30 @@ import com.github.hvasoares.pageobjects.utils.JVMOptions;
 
 public final class ReportContextFactory {
 	
+	/**
+	 * -Dpageobject.report.path=/home/test/path
+	 * or, for windows users
+	 * -Dpageobject.report.events=C:\\test\path
+	 * 
+	 * Default value is user.home value of system properties.
+	 */
 	public static final String REPORT_PATH = "-Dpageobject.report.path";
+	
+	/**
+	 * -Dpageobject.report.strategies=screenshot
+	 * 
+	 */
 	public static final String REPORT_STRATEGIES = "-Dpageobject.report.strategies";
 	
+	/**
+	 * -Dpageobject.report.events=changePage,click,doubleClick,fill
+	 * 
+	 * Default value is changePage and it is override if any value is supplied. 
+	 */
+	public static final String REPORT_EVENTS = "-Dpageobject.report.events";
+	
 	private static ReportContext context = null;
+	
 	private static JVMOptions jvmOptions = new JVMOptions();
 	
 	public static ReportContext createReportContext(){
@@ -25,7 +45,8 @@ public final class ReportContextFactory {
 	private static ReportSettings createSettings(){
 		String rootPath = jvmOptions.getValue( REPORT_PATH );
 		List<String> enabledStrategies = jvmOptions.getValues( REPORT_STRATEGIES );
-		ReportSettings reportSettings = new ReportSettings( rootPath, enabledStrategies );
+		List<String> enabledEvents = jvmOptions.getValues(REPORT_EVENTS);
+		ReportSettings reportSettings = new ReportSettings( rootPath, enabledStrategies , enabledEvents );
 		return reportSettings;
 	} 
 	

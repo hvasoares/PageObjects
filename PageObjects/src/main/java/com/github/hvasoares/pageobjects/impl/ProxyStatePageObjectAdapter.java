@@ -1,7 +1,5 @@
 package com.github.hvasoares.pageobjects.impl;
 
-import javax.swing.JOptionPane;
-
 import com.github.hvasoares.pageobjects.StatePageObject;
 import com.github.hvasoares.pageobjects.proxy.DecoratorObject;
 

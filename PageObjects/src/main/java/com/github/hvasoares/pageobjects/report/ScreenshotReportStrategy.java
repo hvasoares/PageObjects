@@ -27,7 +27,6 @@ public class ScreenshotReportStrategy implements ReportStrategy, WebDriverAware 
 			
 			InputStream in = new ByteArrayInputStream( screenShot );							 
 			OutputStream out = new FileOutputStream( pathGenerator.generate(reportContext, event) );	
-			//ImageIO.write( image , "jpg", out );
 			IOUtils.copy(in, out);
 		} catch ( IOException  e ){			
 			e.printStackTrace();

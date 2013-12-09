@@ -16,7 +16,7 @@ public class ReportedStatePageObject extends ProxyStatePageObjectAdapter  {
 	 
 	@Override 
 	public StatePageObject click(String alias) {
-		if ( !shouldTakeScreenshot() ) {
+		if ( !shouldTakeScreenshot( UserEvents.CLICK ) ) {
 			return getInner().click(alias);
 		} else { 
 			StatePageObject statePageObject = getInner().click(alias);
@@ -27,7 +27,7 @@ public class ReportedStatePageObject extends ProxyStatePageObjectAdapter  {
 
 	@Override
 	public StatePageObject fill(String field, String value) {
-		if ( !shouldTakeScreenshot() ) {
+		if ( !shouldTakeScreenshot( UserEvents.FILL ) ) {
 			return getInner().fill(field, value); 
 		} else { 
 			StatePageObject statePageObject = getInner().fill(field, value);
@@ -38,7 +38,7 @@ public class ReportedStatePageObject extends ProxyStatePageObjectAdapter  {
 
 	@Override
 	public void setState(String stateName) {
-		if ( !shouldTakeScreenshot() ) {
+		if ( !shouldTakeScreenshot( UserEvents.CHANGE_PAGE) ) {
 			getInner().setState(stateName); 
 		} else { 
 			getInner().setState(stateName);
@@ -49,7 +49,7 @@ public class ReportedStatePageObject extends ProxyStatePageObjectAdapter  {
 
 	@Override
 	public StatePageObject doubleClick(String alias) {
-		if ( !shouldTakeScreenshot() ) {
+		if ( !shouldTakeScreenshot( UserEvents.DOUBLE_CLICK ) ) {
 			return getInner().doubleClick(alias);
 		} else { 
 			StatePageObject statePageObject = getInner().doubleClick(alias);
@@ -58,8 +58,9 @@ public class ReportedStatePageObject extends ProxyStatePageObjectAdapter  {
 		}
 	}
 
-	private boolean shouldTakeScreenshot() {
-		return reportContext.getSettings().isEnabled();
+	private boolean shouldTakeScreenshot( String event ) {
+		return reportContext.getSettings().isEnabled() 
+				&& reportContext.getSettings().getEnabledEvents().contains(event);
 	}
 		
 	private void reportEvent( String event ){
