@@ -1,11 +1,15 @@
 package com.github.hvasoares.pageobjects.utils;
 
+import static com.github.hvasoares.pageobjects.utils.Coolections.hashMap;
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Coolections {
 
@@ -25,6 +29,24 @@ public class Coolections {
 			result.put((K)values[i], (V)values[i+1]);
 		}
 		
+		return result;
+	}
+	
+	public static <K,V> Map<K,V> merge(Map<K,V> a, Object ... values) {
+		Map<K, V> result = new HashMap<>();
+		Map<K, V> b = hashMap(values); 
+		for(Entry<K, V> e : a.entrySet())
+			result.put(e.getKey(), e.getValue());
+		
+		for(Entry<K, V> e : b.entrySet())
+			result.put(e.getKey(), e.getValue());
+		return result;
+	}
+
+	public static <K,V> Map<K, V> projection(Map<K,V> from,K ... keys) {
+		Map<K, V> result = new HashMap<>();
+		for(K k : keys)
+			result.put(k, from.get(k));
 		return result;
 	}
 }
