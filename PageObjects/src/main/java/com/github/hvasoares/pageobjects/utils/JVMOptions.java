@@ -2,6 +2,7 @@ package com.github.hvasoares.pageobjects.utils;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,7 +44,7 @@ public class JVMOptions {
 		if ( value != null ){
 			return Arrays.asList( value.split(",") );
 		}
-		return Collections.emptyList();
+		return new ArrayList<>();
 			
 	}
 	
