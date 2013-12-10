@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 
 class PathGenerator {
 
-	public String generate( ReportContext context, String event ){
+	public String generate( ReportContextI context, String event ){
 
 		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
 		String formatedDate = formater.format( context.getExecutionDate() );
@@ -21,14 +21,14 @@ class PathGenerator {
 		return dir.getAbsolutePath() + File.separator + getFileName(context, event);
 	}
 
-	private String getContainerFolder(ReportContext context ){
+	private String getContainerFolder(ReportContextI context ){
 		String name = context.getCurrentTest().getDisplayName();
 		int indexOfEndMethodName = name.indexOf("(");
 		String className = name.substring( indexOfEndMethodName + 1 , name.length() - 1 );		
 		return className;
 	} 
 
-	private String getFileName(  ReportContext reportContext , String event ){	
+	private String getFileName(  ReportContextI reportContext , String event ){	
 		int currentStep = reportContext.getCurrentStep();		
 		String name = reportContext.getCurrentTest().getDisplayName();
 		int indexOfEndMethodName = name.indexOf("(");

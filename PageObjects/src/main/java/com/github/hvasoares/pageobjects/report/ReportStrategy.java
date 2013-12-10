@@ -2,5 +2,5 @@ package com.github.hvasoares.pageobjects.report;
 
 public interface ReportStrategy {
 
-	void report( ReportContext reportContext,  String event );
+	void report( ReportContextI reportContext,  String event );
 }

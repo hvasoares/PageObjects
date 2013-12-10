@@ -5,9 +5,9 @@ import org.junit.runner.notification.RunListener;
 
 public class ReportListener extends RunListener {
 
-	private ReportContext reportContext;
+	private ReportContextI reportContext;
 	
-	public ReportListener( ReportContext reportContext ) {
+	public ReportListener( ReportContextI reportContext ) {
 		this.reportContext = reportContext;
 	}
 	

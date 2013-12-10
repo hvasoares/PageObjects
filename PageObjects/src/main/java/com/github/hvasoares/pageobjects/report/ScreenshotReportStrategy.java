@@ -17,11 +17,11 @@ public class ScreenshotReportStrategy implements ReportStrategy, WebDriverAware 
 	private PathGenerator pathGenerator = new PathGenerator();
 	
 	@Override
-	public void report( ReportContext reportContext ,  String event ) {	 
+	public void report( ReportContextI reportContext ,  String event ) {	 
 		takeScreenshot( reportContext  , event );
 	}
 	
-	private void takeScreenshot( ReportContext reportContext  , String event   ) {		
+	private void takeScreenshot( ReportContextI reportContext  , String event   ) {		
 		try{			
 			byte[] screenShot = ( (TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
 			
