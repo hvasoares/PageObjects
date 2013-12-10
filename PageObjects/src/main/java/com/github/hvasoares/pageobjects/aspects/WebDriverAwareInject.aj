@@ -10,7 +10,12 @@ public aspect WebDriverAwareInject {
 	public WebDriver WebDriverAware.webDriver = null;
 	
 	public WebDriver WebDriverAware.getWebDriver(){
-		webDriver = WebDriverHolder.getWebDriver();
+		if(webDriver == null)
+			webDriver = WebDriverHolder.getWebDriver();
 		return webDriver;
-	} 
+	}
+	
+	public void WebDriverAware.setWebDriver(WebDriver value){
+		webDriver = value;
+	}
 }
