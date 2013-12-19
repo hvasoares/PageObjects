@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.github.pageobjects</groupId>
+	<groupId>com.github.hvasoares.pageobjects</groupId>
 	<artifactId>page-objects</artifactId>
-	<version>1.2.2-SNAPSHOT</version>
+	<version>1.4.2</version>
 	<packaging>jar</packaging>
 
 	<name>PageObject model for your selenium tests</name>
