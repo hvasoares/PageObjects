@@ -1,6 +1,6 @@
 package com.github.hvasoares.pageobjects.impl.mutability;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
@@ -9,12 +9,10 @@ import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Rule;
 import org.junit.Test;
 
+import com.github.hvasoares.pageobjects.Mutability;
 import com.github.hvasoares.pageobjects.StatePageObject;
 import com.github.hvasoares.pageobjects.impl.ProxyStatePageObjectAdapter;
 import com.github.hvasoares.pageobjects.impl.StatePageObjectSymbolTable;
-import com.github.hvasoares.pageobjects.impl.mutability.MultiArgsClickable;
-import com.github.hvasoares.pageobjects.impl.mutability.PageContextI;
-import com.github.hvasoares.pageobjects.impl.mutability.ProxyStatePageObject;
 import com.github.hvasoares.pageobjects.proxy.DecoratorObject;
 import com.github.hvasoares.pageobjects.proxy.MatryoshkaDollFactory;
 
@@ -23,7 +21,7 @@ public class ProxyStatePageObjectTest {
 	@Mock private PageContextI context;
 	private MatryoshkaDollFactory<StatePageObject, ProxyStatePageObjectAdapter> m;
 	@Mock private StatePageObjectSymbolTable realObject;
-	@Mock private MultiArgsClickable mutability; 
+	@Mock private Mutability mutability; 
 	@Rule public JUnitRuleMockery ctx = new JUnitRuleMockery(){{
 		setImposteriser(ClassImposteriser.INSTANCE);
 	}};

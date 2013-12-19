@@ -2,8 +2,6 @@ package com.github.hvasoares.pageobjects.runner;
 
 import org.openqa.selenium.WebDriver;
 
-import lombok.Delegate;
-
 import com.github.hvasoares.pageobjects.AbstractFactory;
 import com.github.hvasoares.pageobjects.DefaultFactory;
 import com.github.hvasoares.pageobjects.PageObjectBuilder;

@@ -19,76 +19,50 @@ public class ReportContext implements ReportContextI {
 		this.strategies = strategies;
 		executionDate = new Date();
 	}
+	
+	@Override
+	public void tryReportEvent(String event){
+		if(shouldNotTakeScreenShotOf(event))
+			return;
+			
+		for ( ReportStrategy strategy : strategies ){
+			strategy.report(  this, event );
+		}
+		nextStep();
+	}
+	
+	private boolean shouldNotTakeScreenShotOf(String event){
+		return !(settings.isEnabled() && settings.getEnabledEvents().contains(event));
+	}
+
 	 
-	/* (non-Javadoc)
-	 * @see com.github.hvasoares.pageobjects.report.ReportContextI#getSettings()
-	 */
 	@Override
 	public ReportSettings getSettings(){
 		return settings;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.github.hvasoares.pageobjects.report.ReportContextI#getStrategies()
-	 */
-	@Override
-	public List<ReportStrategy> getStrategies() {
-		return strategies;
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.github.hvasoares.pageobjects.report.ReportContextI#getCurrentStep()
-	 */
 	@Override
 	public int getCurrentStep() {
 		return currentStep;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.github.hvasoares.pageobjects.report.ReportContextI#nextStep()
-	 */
-	@Override
-	public void nextStep(){
+	private void nextStep(){
 		currentStep += 1;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.github.hvasoares.pageobjects.report.ReportContextI#getCurrentTest()
-	 */
 	@Override
 	public Description getCurrentTest() {
 		return currentTest;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.github.hvasoares.pageobjects.report.ReportContextI#setCurrentTest(org.junit.runner.Description)
-	 */
 	@Override
 	public void setCurrentTest(Description currentTest) {
 		this.currentTest = currentTest;
 		currentStep = 0;
 	}
 	 
-	/* (non-Javadoc)
-	 * @see com.github.hvasoares.pageobjects.report.ReportContextI#getExecutionDate()
-	 */
 	@Override
 	public Date getExecutionDate() {
 		return executionDate;
-	}
-	@Override
-	public boolean shouldTakeScreenShotOf(String event){
-		return getSettings().isEnabled() && getSettings().getEnabledEvents().contains(event);
-	}
-	
-	@Override
-	public void tryReportEvent(String event){
-		if(!shouldTakeScreenShotOf(event))
-			return;
-			
-		for ( ReportStrategy strategy : getStrategies() ){
-			strategy.report(  this, event );
-		}
-		nextStep();
-	}
+	}	
 }

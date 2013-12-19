@@ -11,25 +11,33 @@ import com.github.hvasoares.pageobjects.aspects.WebDriverAware;
 
 public class PageLoadedWait implements WebDriverAware {
 	
+	private ExpectedCondition<Boolean> expectation;
+
+	public PageLoadedWait() {
+		expectation = new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				return ((JavascriptExecutor)driver)
+						.executeScript("return document.readyState").equals("complete");
+			}
+		};
+	}
+
 	public void waitForPageLoaded(){		
 		waitForPageLoaded(30);
 	}
 	
 	public void waitForPageLoaded( int timeOutInSeconds ) {
 		WebDriver webDriver = getWebDriver();
-		
-		ExpectedCondition<Boolean> expectation = new ExpectedCondition<Boolean>() {
-			public Boolean apply(WebDriver driver) {
-				return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
-			}
-		};
-		
-		
+				
 		Wait<WebDriver> wait = new WebDriverWait( webDriver , timeOutInSeconds );
 		try {
 			wait.until(expectation);
 		} catch(Throwable error) {
 			throw new TimeoutException( "We waited for "+ timeOutInSeconds +" and the page " + webDriver.getCurrentUrl() + " took too long to load!" );			 
 		}
+	}
+
+	public ExpectedCondition<Boolean> getExpectation() {
+		return expectation;
 	} 
 }

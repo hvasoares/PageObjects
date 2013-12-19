@@ -25,11 +25,11 @@ public class FluidChoiceTest {
 		);
 		
 		instance.setBrowser(
-			browser=ctx.mock(Browser.class)
+			browser
 		);
 		
 		ctx.checking(new Expectations(){{
-			oneOf(browser).click("//xpathToSelect//option[contains(.,'someValue')]");
+			oneOf(browser).click("//xpathToSelect//option[.='someValue']");
 		}});
 		
 		instance.fill("someValue");

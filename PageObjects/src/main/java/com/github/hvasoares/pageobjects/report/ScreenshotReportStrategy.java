@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.management.RuntimeErrorException;
+
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -29,7 +31,7 @@ public class ScreenshotReportStrategy implements ReportStrategy, WebDriverAware 
 			OutputStream out = new FileOutputStream( pathGenerator.generate(reportContext, event) );	
 			IOUtils.copy(in, out);
 		} catch ( IOException  e ){			
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't create screenshots",e);
 		}
 	} 	 
 }

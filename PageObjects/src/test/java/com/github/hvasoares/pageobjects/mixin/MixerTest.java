@@ -53,15 +53,12 @@ public class MixerTest {
 			will(returnValue(Arrays.asList("mixin4")));
 			
 			Sequence seq = ctx.sequence("invocation sequence");
-			
+
 			oneOf(mixin4).build(pageObject); inSequence(seq);
 			oneOf(mixin5).build(pageObject); inSequence(seq);
 			oneOf(mixin3).build(pageObject); inSequence(seq);
 			oneOf(mixin2).build(pageObject); inSequence(seq);
 			oneOf(mixin1).build(pageObject); inSequence(seq);
-			
-			oneOf(pageObject).setName("mixin1");inSequence(seq);
-					
 		}});
 		instance.add(mixin1);
 		instance.add(mixin2);

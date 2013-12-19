@@ -1,6 +1,6 @@
 package com.github.hvasoares.pageobjects.impl.mutability;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
@@ -9,11 +9,9 @@ import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Rule;
 import org.junit.Test;
 
+import com.github.hvasoares.pageobjects.Mutability;
 import com.github.hvasoares.pageobjects.impl.PageObjectBuilderSymbolTable;
 import com.github.hvasoares.pageobjects.impl.ProxyPageObjectBuilderAdapter;
-import com.github.hvasoares.pageobjects.impl.mutability.MultiArgsClickable;
-import com.github.hvasoares.pageobjects.impl.mutability.PageContextI;
-import com.github.hvasoares.pageobjects.impl.mutability.ProxyPageBuilder;
 import com.github.hvasoares.pageobjects.proxy.DecoratorObject;
 import com.github.hvasoares.pageobjects.proxy.MatryoshkaDollFactory;
 
@@ -25,7 +23,7 @@ public class ProxyPageBuilderTest {
 	@Mock private PageObjectBuilderSymbolTable realObject;
 	@Mock private PageObjectBuilderSymbolTable outerPageBuilder;
 	@Mock private PageContextI context;
-	@Mock private MultiArgsClickable mutability;
+	@Mock private Mutability mutability;
 	@Mock private DecoratorObject<PageObjectBuilderSymbolTable> outerStateObject;
 
 	@Test

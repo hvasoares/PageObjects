@@ -17,7 +17,7 @@ public class FixedChoiceTest {
 
 	private FixedChoice instance;
 	@Rule
-	private JUnitRuleMockery ctx = new JUnitRuleMockery(){{
+	public JUnitRuleMockery ctx = new JUnitRuleMockery(){{
 		setImposteriser(ClassImposteriser.INSTANCE);
 	}};
 	@Mock
@@ -30,7 +30,6 @@ public class FixedChoiceTest {
 				select = ctx.mock(Select.class),
 				"option1"
 		);
-		browser = ctx.mock(Browser.class);
 		
 		ctx.checking(new Expectations(){{
 			oneOf(select).setBrowser(browser);

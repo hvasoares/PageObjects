@@ -40,12 +40,12 @@ public class FieldFactoryImplTest {
 	
 	@Test
 	public void shouldCreateTextfields(){
-		assertTrue(inst.createTextField("field","xpath") instanceof TextField);
+		assertTrue(inst.createTextField("field","xpath") instanceof EraseBeforeFillTextField);
 	}
 
 	@Test
 	public void shouldDelegateFileFieldCreationingToItsFactory(){
-		final Field fileField = ctx.mock(Field.class);
+		final CustomField fileField = ctx.mock(CustomField.class);
 		ctx.checking(new Expectations(){{
 			oneOf(fileFieldFactory).create("someAlias","someXpath");
 			will(returnValue(fileField));

@@ -32,7 +32,7 @@ public class AssertivePageObjectImplTest {
 		
 		
 		ctx.checking(new Expectations(){{
-			oneOf(driver).findElements(By.xpath("//someXpath"));
+			oneOf(driver).findElement(By.xpath("//someXpath"));
 			will(throwException(new NoSuchElementException("some exception")));
 		}});
 		
@@ -43,7 +43,7 @@ public class AssertivePageObjectImplTest {
 	@Test(expected=NoSuchElementException.class)
 	public void shouldSupportNamedAssertions(){
 		ctx.checking(new Expectations(){{
-			oneOf(driver).findElements(By.xpath("//someXpath"));
+			oneOf(driver).findElement(By.xpath("//someXpath"));
 			will(throwException(new NoSuchElementException("some exception")));
 		}});
 		

@@ -1,23 +1,19 @@
 package com.github.hvasoares.pageobjects.impl.mutability;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.lift.HamcrestWebDriverTestCase;
+import org.openqa.selenium.NoSuchElementException;
 
-import com.github.hvasoares.pageobjects.PageObjectBuilder;
 import com.github.hvasoares.pageobjects.impl.Readability;
-import com.github.hvasoares.pageobjects.impl.mutability.FluidXpath;
-import com.github.hvasoares.pageobjects.impl.mutability.FluidXpathFactoryI;
-import com.github.hvasoares.pageobjects.impl.mutability.MutableReadability;
 import com.github.hvasoares.pageobjects.impl.readability.ReadabilityFactory;
 
 public class MutableReadabilityTest {
@@ -75,7 +71,7 @@ public class MutableReadabilityTest {
 				returnValue("value1"),
 				returnValue("value2"),
 				returnValue("value3"),
-				throwException(new NoSuchElementException())
+				throwException(new NoSuchElementException("some reason"))
 			));
 		}});
 				
