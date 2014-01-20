@@ -135,4 +135,9 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 		state = null;
 	}
 	
+	@Override
+	public PageObjectRepository getRepository() {
+		return repository;
+	}
+	
 }

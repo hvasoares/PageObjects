@@ -4,6 +4,7 @@ import org.apache.commons.jexl2.MapContext;
 
 import com.github.hvasoares.pageobjects.DefaultFactory;
 import com.github.hvasoares.pageobjects.PageObjectBuilder;
+import com.github.hvasoares.pageobjects.RepositoryAwareFactory;
 import com.github.hvasoares.pageobjects.SerialPageObjectBuilderI;
 import com.github.hvasoares.pageobjects.StatePageObject;
 import com.github.hvasoares.pageobjects.impl.PageObjectFactoryImpl;
@@ -22,7 +23,7 @@ import com.github.hvasoares.pageobjects.runner.PageObjectRepository;
 public class ELPageObjectBuilderFactory{
 
 	private ElContextImpl elContext;
-	private DefaultFactory factory;
+	private RepositoryAwareFactory factory;
 	private SerialPageObjectBuilderI serialPageObjectBuilder;
 	public ELPageObjectBuilderFactory(PageObjectRepository repo){
 		factory = new DefaultFactory(repo);
