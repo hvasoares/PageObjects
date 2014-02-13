@@ -2,6 +2,7 @@ package com.github.hvasoares.pageobjects;
 
 import org.openqa.selenium.WebDriver;
 
+import com.github.hvasoares.pageobjects.automata.AutomataFactory;
 import com.github.hvasoares.pageobjects.impl.ActualFieldFactoryGetter;
 import com.github.hvasoares.pageobjects.impl.FieldFactory;
 import com.github.hvasoares.pageobjects.impl.LazyFieldFactory;
@@ -53,8 +54,10 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 				new PageObjectFactoryImpl(
 						getLazyFieldFactory()
 				),
+				AutomataFactory.create(),
 				ReadabilityImplementationFactory.createReadabilityBuilder(getWebDriver()),
 				MutabilityImplementationFactory.createPageBuilder(getLazyFieldFactory())
+				
 		);
 		return result.startBuild( 
 				new PageObjectImpl(

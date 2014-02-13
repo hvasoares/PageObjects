@@ -24,4 +24,6 @@ public interface PageObjectBuilder {
 	Readability readability();
 	
 	Mutability mutability();
+	
+	Automata automata();
 }
