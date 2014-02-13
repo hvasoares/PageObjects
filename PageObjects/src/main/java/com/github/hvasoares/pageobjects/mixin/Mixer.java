@@ -1,6 +1,7 @@
 package com.github.hvasoares.pageobjects.mixin;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -25,8 +26,12 @@ public class Mixer implements MixerI {
 	}
 	
 	private Stack<String> getStack(MixinI mixin,Stack<String> stack) {
+		if(stack==null)
+			stack = new Stack<>();
+			
 		stack = stack==null? new Stack<String>() : stack;
-		for(String dep : mixin.getDependencies()){
+		List<String> deps = mixin.getDependencies();
+		for(String dep : deps){
 			checkArgument(
 				db.containsKey(dep),
 				String.format(
