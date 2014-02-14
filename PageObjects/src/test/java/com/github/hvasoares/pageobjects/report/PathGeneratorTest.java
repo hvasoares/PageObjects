@@ -21,7 +21,8 @@ public class PathGeneratorTest {
 		setImposteriser(ClassImposteriser.INSTANCE);
 	}};
 	private ReportContext reportContext;
-	private PathGenerator tested;		
+	private PathGenerator tested;
+	private String root;		
 
 	
 	@Before
@@ -32,13 +33,14 @@ public class PathGeneratorTest {
 	@Test
 	public void testPathGeneration() {
 		tested = new PathGenerator();
+		root = new File(this.getClass().getClassLoader().getResource("").getPath()).getAbsolutePath();
 		final Description testDescription = context.mock(Description.class);
 		final ReportSettings settings = context.mock(ReportSettings.class);
 		
 		final Calendar date = new GregorianCalendar(2013, 3, 7, 12,00);
 		context.checking( new Expectations(){{
 			oneOf( reportContext ).getSettings(); will( returnValue (settings) );
-			oneOf( settings ).getPath(); will( returnValue ( "C:\\test-date") );
+			oneOf( settings ).getPath(); will( returnValue ( root+"genericOsPath") );
 			oneOf(reportContext).getCurrentStep(); will(returnValue(5));
 			oneOf(reportContext).getExecutionDate(); will(returnValue( date.getTime() ) );
 			atLeast(2).of(reportContext).getCurrentTest(); will( returnValue( testDescription ));
@@ -51,10 +53,13 @@ public class PathGeneratorTest {
 		
 		// then
 		context.assertIsSatisfied();
-		 
-		Assert.assertThat( path, 
+		
+		Assert.assertThat( 
+				path, 
 				Matchers.equalTo(  
-						"C:\\test-date" + File.separator + "07-04-2013-12-00-00" + File.separator + "com.github.pageobject.TestClass" + File.separator + "5-test with name x-click.jpg") );
+						root+"genericOsPath" + File.separator + "07-04-2013-12-00-00" + File.separator + "com.github.pageobject.TestClass" + File.separator + "5-test with name x-click.jpg"
+				) 
+		);
 	}
 
 }
