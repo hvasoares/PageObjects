@@ -37,7 +37,7 @@ public class ClassReflectionUtilsImpl implements ClassReflectionUtils{
 				m.invoke(obj);
 			else
 				m.invoke(obj,args);
-		} catch (IllegalAccessException | IllegalArgumentException| InvocationTargetException e) {
+		} catch (IllegalAccessException | InvocationTargetException | RuntimeException e) {
 			throw new RuntimeException("Could not call the method " + m.getName(),e);
 		}
 	}

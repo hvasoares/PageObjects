@@ -31,7 +31,11 @@ public class BrowserImpl implements Browser{
 
 	@Override
 	public void goToStartUrl(String url) {
-		driver.get(url);
+		try{
+			driver.get(url);
+		}catch(Throwable e){
+			throw new RuntimeException(e);
+		}
 		notStarted = false;
 	}
 

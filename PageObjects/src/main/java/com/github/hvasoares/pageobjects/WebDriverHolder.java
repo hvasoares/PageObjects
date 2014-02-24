@@ -12,7 +12,7 @@ public final class WebDriverHolder {
 	
 	public static WebDriver getWebDriver(){
 		if ( webDriver == null ){
-			throw new IllegalStateException( WebDriverHolder.class.getSimpleName() + " não contém uma referência válida de " + WebDriver.class.getName() );
+			throw new IllegalStateException( WebDriverHolder.class.getSimpleName() + " NÃ£o contÃ©m uma referÃªncia vÃ¡lida de " + WebDriver.class.getName() );
 		}
 		return webDriver;
 	}
