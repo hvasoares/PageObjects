@@ -49,15 +49,14 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 
 	@Override
 	public PageObjectBuilder createPageObjectBuilder(){
-		MatryoshkaDollFactory<PageObjectBuilderSymbolTable, ProxyPageObjectBuilderAdapter> m = new MatryoshkaDollFactory<PageObjectBuilderSymbolTable,ProxyPageObjectBuilderAdapter>();
+		MatryoshkaDollFactory<PageObjectBuilderSymbolTable, ProxyPageObjectBuilderAdapter> m = new MatryoshkaDollFactory<>();
 		PageObjectBuilderSymbolTable result = m.create(
 				new PageObjectFactoryImpl(
 						getLazyFieldFactory()
 				),
 				AutomataFactory.create(),
 				ReadabilityImplementationFactory.createReadabilityBuilder(getWebDriver()),
-				MutabilityImplementationFactory.createPageBuilder(getLazyFieldFactory())
-				
+				MutabilityImplementationFactory.createPageBuilder(getLazyFieldFactory())				
 		);
 		return result.startBuild( 
 				new PageObjectImpl(
@@ -76,7 +75,7 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 	public StatePageObject getStateObject(){
 		if(this.state!=null)
 			return state;
-		MatryoshkaDollFactory<StatePageObject, ProxyStatePageObjectAdapter> m = new MatryoshkaDollFactory<StatePageObject,ProxyStatePageObjectAdapter>();
+		MatryoshkaDollFactory<StatePageObject, ProxyStatePageObjectAdapter> m = new MatryoshkaDollFactory<>();
 		state= m.create(
 				new StatePageObjectImpl(repository),
 				ReportFactory.createReportedStatePageObject(),

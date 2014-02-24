@@ -15,12 +15,14 @@ public class PageObjectRunner extends Runner implements BrowserLocker{
 	private JSteakRunnerBuilder steakRunner;
 	private PageObjectDescription descriptionGetter;
 	private RepositoryAwareFactory factory;
+	private boolean repositorySetted;
 
 	public PageObjectRunner(Class<?> clazz){
 		this(clazz,null);
 	}
 	
 	public PageObjectRunner(Class<?> clazz, RepositoryAwareFactory factory){
+		repositorySetted = false;
 		ObjectConstructor objConst = new ObjectConstructor();
 		this.steakRunner = new JSteakRunnerBuilder(clazz);
 		this.descriptionGetter = new PageObjectDescription(
@@ -29,10 +31,10 @@ public class PageObjectRunner extends Runner implements BrowserLocker{
 			clazz
 		);
 		
-		if(factory == null)
+		if(factory == null){
 			this.factory = new DefaultFactory(descriptionGetter.getRepository());
-		else{
-			factory.setRepository(descriptionGetter.getRepository());
+			repositorySetted=true;
+		}else{
 			this.factory=factory;
 		};
 		
@@ -53,6 +55,8 @@ public class PageObjectRunner extends Runner implements BrowserLocker{
 		instance.setBrowserLocker(this);
 		notifier.addListener( ReportListenerFactory.createListener() );
 		try{
+			if(!repositorySetted)
+				factory.setRepository(descriptionGetter.getRepository());
 			steakRunner.run(notifier);
 			instance.close(this);;
 		}catch(RuntimeException ex){
