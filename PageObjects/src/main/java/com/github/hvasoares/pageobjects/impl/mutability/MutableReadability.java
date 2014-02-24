@@ -39,10 +39,14 @@ public class MutableReadability implements MutableReadabilityI{
 
 	@Override
 	public String read(String... args) {
-		checkArgument(args.length%2==1 && args.length>=3,"The format of argument must be: alias[,placeHolderName, value]+ ");
+		checkArgument(args.length>=2,"The format of argument must be: alias , [singleValue] | [placeHolderName, value]+ ");
 		checkNotNull(db.get(args[0]),"The readability aliased with '"+args[0]+ "' not exists.");
+		String[] newArgs = args;
+		if(args.length==2){
+			newArgs = new String[]{args[0],"value",args[1]};
+		}
 		FluidXpathI xpath = db.get(args[0]);
-		for(Entry<String, String> e : Utils.toMapSetEntry(Arrays.copyOfRange(args, 1, args.length))){
+		for(Entry<String, String> e : Utils.toMapSetEntry(Arrays.copyOfRange(newArgs, 1, newArgs.length))){
 			xpath.bind(e.getKey(), e.getValue());
 		}
 		String result = xpath.getTransformedXpath();
@@ -51,8 +55,8 @@ public class MutableReadability implements MutableReadabilityI{
 				"This xpath has a :positioningMarker you must use readAsList")
 		;
 		Readability read = readabilityFactory.create();
-		read.setProperty(args[0], result);
-		return read.read(args[0]);
+		read.setProperty(newArgs[0], result);
+		return read.read(newArgs[0]);
 	}
 	
 	@Override

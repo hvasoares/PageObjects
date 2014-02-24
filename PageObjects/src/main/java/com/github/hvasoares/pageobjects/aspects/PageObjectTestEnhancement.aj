@@ -7,7 +7,6 @@ import com.github.hvasoares.pageobjects.Mutability;
 import com.github.hvasoares.pageobjects.StatePageObject;
 import com.github.hvasoares.pageobjects.impl.Readability;
 import com.github.hvasoares.pageobjects.impl.browser.Browser;
-import com.github.hvasoares.pageobjects.runner.PageObjectFactoryAware;
 
 public aspect PageObjectTestEnhancement {
 	private AbstractFactory EnhancedPageObjectTest.factory = null;
