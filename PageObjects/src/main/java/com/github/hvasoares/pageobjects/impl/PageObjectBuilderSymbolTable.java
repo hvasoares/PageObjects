@@ -3,6 +3,7 @@ package com.github.hvasoares.pageobjects.impl;
 import org.openqa.selenium.WebDriver;
 
 import com.github.hvasoares.pageobjects.Automata;
+import com.github.hvasoares.pageobjects.AutomataFieldFiller;
 import com.github.hvasoares.pageobjects.Mutability;
 import com.github.hvasoares.pageobjects.PageObjectBuilder;
 

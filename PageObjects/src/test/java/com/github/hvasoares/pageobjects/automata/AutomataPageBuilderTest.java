@@ -22,17 +22,18 @@ public class AutomataPageBuilderTest {
 		setImposteriser(ClassImposteriser.INSTANCE);
 	}};
 	@Mock private AutomataImpl automata;
+	@Mock private AutomataFieldFillerImpl fieldFiller;
 
 	@Test
 	public void shouldCreateAutomataBeforeItsFirstUse() {
-		instance = new AutomataPageBuilder(automata);
+		instance = new AutomataPageBuilder(automata,fieldFiller);
 		MatryoshkaDollFactory<PageObjectBuilderSymbolTable,ProxyPageObjectBuilderAdapter> dollFactory = 
 				new MatryoshkaDollFactory<>();
 		
 		PageObjectBuilderSymbolTable doll = dollFactory.create(innerObject, instance);
 		
 		ctx.checking(new Expectations(){{
-			
+			oneOf(automata).setFieldFiller(fieldFiller);
 			oneOf(automata).setBuilder(innerObject);
 		}});
 		

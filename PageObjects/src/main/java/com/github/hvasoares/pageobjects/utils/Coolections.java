@@ -18,6 +18,8 @@ public class Coolections {
 		return Arrays.asList(result);
 	}
 	
+	
+	@SuppressWarnings("unchecked")
 	public static <K,V> Map<K,V> hashMap(Object ... values){
 		checkArgument(values.length%2==0, "The values lenght cannot be a odd number");
 		HashMap<K,V> result = new HashMap<>();

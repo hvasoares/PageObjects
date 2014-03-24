@@ -1,14 +1,21 @@
 package com.github.hvasoares.pageobjects.automata;
 
 import com.github.hvasoares.pageobjects.Automata;
+import com.github.hvasoares.pageobjects.AutomataFieldFiller;
 import com.github.hvasoares.pageobjects.PageObjectBuilder;
+
 import static com.google.common.base.Preconditions.*;
 
 public class AutomataImpl implements Automata{
 
 	
 	private PageObjectBuilder builder;
+	private AutomataFieldFiller fieldFiller;
 	
+	public void setFieldFiller(AutomataFieldFiller fieldFiller) {
+		this.fieldFiller = fieldFiller;
+	}
+
 	@Override
 	public PageObjectBuilder addClickable(String alias, String toPage) {
 		return builder.addClickable(alias,returnXpath(alias),toPage);
@@ -33,5 +40,14 @@ public class AutomataImpl implements Automata{
 
 	public void setBuilder(PageObjectBuilder builder) {
 		this.builder = checkNotNull(builder);
+		fieldFiller.setBuilder(builder);
 	}
+
+	public PageObjectBuilder addFieldXpathPair(String alias, String xpath) {
+		return fieldFiller.addFieldXpathPair(alias, xpath);
+	}
+
+	public PageObjectBuilder addFieldXpathPairs(String... args) {
+		return fieldFiller.addFieldXpathPairs(args);
+	}	
 }
