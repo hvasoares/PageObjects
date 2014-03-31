@@ -76,6 +76,11 @@ public class PageObjectTestDSL {
 	@PageObjectFactoryAware
 	public final void setFactory(AbstractFactory value){
 		this.factory = value;
+		beforeTest();
+	}
+
+	protected void beforeTest() {
+		
 	}
 
 	public WebDriver getWebDriver() {
