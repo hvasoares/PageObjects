@@ -14,10 +14,8 @@ import com.github.hvasoares.pageobjects.impl.ProxyStatePageObjectAdapter;
 import com.github.hvasoares.pageobjects.impl.SerialPageObjectBuilder;
 import com.github.hvasoares.pageobjects.impl.StatePageObjectImpl;
 import com.github.hvasoares.pageobjects.impl.assertivepageobject.AssertivenessFactory;
-import com.github.hvasoares.pageobjects.impl.assertivepageobject.AssertivenessImpl;
 import com.github.hvasoares.pageobjects.impl.browser.Browser;
 import com.github.hvasoares.pageobjects.impl.browser.BrowserFactory;
-import com.github.hvasoares.pageobjects.impl.browser.BrowserImpl;
 import com.github.hvasoares.pageobjects.impl.el.ElFactory;
 import com.github.hvasoares.pageobjects.impl.field.ClickableContainerImpl;
 import com.github.hvasoares.pageobjects.impl.field.FieldContainerImpl;
@@ -109,7 +107,6 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 			return driver;
 		WebDriverFactory factory = new FirefoxWebDriverFactory();
  		driver = factory.create();
- 		WebDriverHolder.value(driver);
 		return driver;
 	}
 

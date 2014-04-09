@@ -31,12 +31,12 @@ public class PageObjectRunner extends Runner implements BrowserLocker{
 			clazz
 		);
 		
-		if(factory == null){
-			this.factory = new DefaultFactory(descriptionGetter.getRepository());
+		RepositoryAwareFactory auxFactory = factory;
+		if(auxFactory == null){
+			auxFactory = new DefaultFactory(descriptionGetter.getRepository());
 			repositorySetted=true;
-		}else{
-			this.factory=factory;
-		};
+		}
+		this.factory = new SingletonWebDriverAwareFactory(clazz,auxFactory);
 		
 		steakRunner.setDefaultClassUtil(new ClassReflectionUtilsImpl(
 				objConst,
