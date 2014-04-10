@@ -14,7 +14,7 @@ import com.github.hvasoares.pageobjects.impl.field.file.PathGeneratorImpl;
 
 public class FirefoxWebDriverFactory implements WebDriverFactory{
 
-	private FirefoxDriver result;
+	private static FirefoxDriver result;
 
 	@Override
 	public WebDriver create() {
