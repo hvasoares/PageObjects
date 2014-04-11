@@ -13,8 +13,8 @@ import com.github.hvasoares.pageobjects.impl.webdriver.WebDriverFactory;
 public class SingletonWebDriverAwareFactory implements RepositoryAwareFactory {
 
 	private RepositoryAwareFactory innerFactory;
-	private WebDriverFactory driverFactory;
 	private WebDriver webDriver;
+	private WebDriverFactory driverFactory;
 
 	public SingletonWebDriverAwareFactory(Class<?> clazz,RepositoryAwareFactory innerFactory) {
 		this.innerFactory = innerFactory;
@@ -28,16 +28,13 @@ public class SingletonWebDriverAwareFactory implements RepositoryAwareFactory {
 			return;
 		}
 		driverFactory = objectConstructor.construct(pobjectTest.driverFactory());
+		getWebDriver();
 	}
-
+	
 	public WebDriver getWebDriver() {
 		if(webDriver!=null)
 			return webDriver;
-		
-		if(driverFactory!=null)
-			webDriver =  driverFactory.create();
-		else
-			webDriver =innerFactory.getWebDriver();
+		webDriver =  driverFactory.create();
 		WebDriverHolder.value(webDriver);
 		return webDriver;
 	}

@@ -39,7 +39,9 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 	private SerialPageObjectBuilderI serialBuilder;
 	private FieldFactory fieldFactory;
 	
-	public DefaultFactory(){}
+	public DefaultFactory(){
+		System.out.println("");
+	}
 	
 	public DefaultFactory(PageObjectRepository repository) {
 		setRepository(repository);
