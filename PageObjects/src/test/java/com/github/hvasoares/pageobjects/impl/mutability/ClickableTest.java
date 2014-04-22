@@ -7,13 +7,9 @@ import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.internal.seleniumemulation.Click;
 
 import com.github.hvasoares.pageobjects.PageObjectBuilder;
 import com.github.hvasoares.pageobjects.StatePageObject;
-import com.github.hvasoares.pageobjects.impl.mutability.BuildTimeI;
-import com.github.hvasoares.pageobjects.impl.mutability.Clickable;
-import com.github.hvasoares.pageobjects.impl.mutability.ExecutionTimeI;
 
 public class ClickableTest {
 

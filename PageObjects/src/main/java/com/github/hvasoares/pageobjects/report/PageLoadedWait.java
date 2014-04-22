@@ -7,9 +7,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.github.hvasoares.pageobjects.aspects.WebDriverAware;
+import com.github.hvasoares.pageobjects.WebDriverHolder;
 
-public class PageLoadedWait implements WebDriverAware {
+public class PageLoadedWait{
 	
 	private ExpectedCondition<Boolean> expectation;
 
@@ -27,7 +27,7 @@ public class PageLoadedWait implements WebDriverAware {
 	}
 	
 	public void waitForPageLoaded( int timeOutInSeconds ) {
-		WebDriver webDriver = getWebDriver();
+		WebDriver webDriver = WebDriverHolder.getWebDriver();
 				
 		Wait<WebDriver> wait = new WebDriverWait( webDriver , timeOutInSeconds );
 		try {

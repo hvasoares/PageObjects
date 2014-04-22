@@ -1,12 +1,13 @@
 package com.github.hvasoares.pageobjects.runner.resources;
 
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 
 import com.github.hvasoares.pageobjects.PageObjectBuilderFactory;
 import com.github.hvasoares.pageobjects.runner.PageObjectFactoryAware;
 import com.github.hvasoares.pageobjects.runner.PageObjectRunner;
 import com.github.hvasoares.pageobjects.runner.PageObjectTest;
-
+@Ignore
 @RunWith(PageObjectRunner.class)
 @PageObjectTest(repository=SampleRepository.class)
 public class SampleTest {

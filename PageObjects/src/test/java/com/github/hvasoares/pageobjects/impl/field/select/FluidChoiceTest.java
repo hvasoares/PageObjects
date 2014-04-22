@@ -29,7 +29,7 @@ public class FluidChoiceTest {
 		);
 		
 		ctx.checking(new Expectations(){{
-			oneOf(browser).click("//xpathToSelect//option[.='someValue']");
+			oneOf(browser).click("//xpathToSelect//option[normalize-space(text())='someValue']");
 		}});
 		
 		instance.fill("someValue");

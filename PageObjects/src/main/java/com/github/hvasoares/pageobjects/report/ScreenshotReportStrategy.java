@@ -6,15 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.management.RuntimeErrorException;
-
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-import com.github.hvasoares.pageobjects.aspects.WebDriverAware;
+import com.github.hvasoares.pageobjects.WebDriverHolder;
 
-public class ScreenshotReportStrategy implements ReportStrategy, WebDriverAware {
+public class ScreenshotReportStrategy implements ReportStrategy{
  
 	private PathGenerator pathGenerator = new PathGenerator();
 	
@@ -25,7 +23,7 @@ public class ScreenshotReportStrategy implements ReportStrategy, WebDriverAware 
 	
 	private void takeScreenshot( ReportContextI reportContext  , String event   ) {		
 		try{			
-			byte[] screenShot = ( (TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
+			byte[] screenShot = ( (TakesScreenshot) WebDriverHolder.getWebDriver()).getScreenshotAs(OutputType.BYTES);
 			
 			InputStream in = new ByteArrayInputStream( screenShot );							 
 			OutputStream out = new FileOutputStream( pathGenerator.generate(reportContext, event) );	

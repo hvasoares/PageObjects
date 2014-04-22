@@ -28,9 +28,14 @@ public class SingletonWebDriverAwareFactory implements RepositoryAwareFactory {
 			return;
 		}
 		driverFactory = objectConstructor.construct(pobjectTest.driverFactory());
-		getWebDriver();
+		setWebDriver(getWebDriver());
 	}
 	
+	public void setWebDriver(WebDriver webDriver2) {
+		innerFactory.setWebDriver(webDriver2);
+		
+	}
+
 	public WebDriver getWebDriver() {
 		if(webDriver!=null)
 			return webDriver;

@@ -35,7 +35,11 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 	private StatePageObject state;
 	private Browser browser;
 	private PageObjectRepository repository;
-	private WebDriver driver;
+	private WebDriver webDriver;
+	public void setWebDriver(WebDriver webDriver) {
+		this.webDriver = webDriver;
+	}
+
 	private SerialPageObjectBuilderI serialBuilder;
 	private FieldFactory fieldFactory;
 	
@@ -105,11 +109,11 @@ public class DefaultFactory implements RepositoryAwareFactory, ActualFieldFactor
 		return serialBuilder;
 	}
 	public WebDriver getWebDriver(){
-		if(driver!=null)
-			return driver;
+		if(webDriver!=null)
+			return webDriver;
 		WebDriverFactory factory = new FirefoxWebDriverFactory();
- 		driver = factory.create();
-		return driver;
+ 		webDriver = factory.create();
+		return webDriver;
 	}
 
 	@Override
